@@ -1,5 +1,6 @@
 VideoGameHTML5 Español
 ======================
+DEMO DEL JUEGO: http://cantely.com/demo/lab3d/ (esta en desarrollo).
 
 Videojuego HTML5 MMO de naves espaciales, crafting, comercio, pvp, real-time.
 Este proyecto esta desarrollado con THREE.JS http://threejs.org/
