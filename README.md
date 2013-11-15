@@ -1,6 +1,6 @@
 VideoGameHTML5 Español
 ======================
-DEMO DEL JUEGO: http://cantely.com/demo/lab3d/ (esta en desarrollo).
+DEMO DEL JUEGO: http://cantely.com/demo/lab3d/ (esta en desarrollo).<br>
 NAVE USADA POR AHORA: http://www.turbosquid.com/3d-models/free-3ds-mode-space/588767
 
 Videojuego HTML5 MMO de naves espaciales, crafting, comercio, pvp, real-time.
