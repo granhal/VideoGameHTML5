@@ -45,5 +45,9 @@ Una vez el jugador este registrado y alla elegido esas opciones *(básicas por e
 
 - Colaboración:
   - Si estas interesado en colaborar, ponte en contacto conmigo en @GRANHAL en twitter para la descarga de .obj y texturas.
-
+  - Elaboración 3D y texturas: se buscan formás básicas, texturas de 256 o inferiores.
+  - Art: Sci-fi, naves espaciales, starwars.. etc..
+  - Desarrollo: HTML5 (threejs fundamental).
+  - Metodología: Ideas, skills, items, naves, elaboración, historia, quest, lo que se te ocurra, pero que tenga sentido.
+  
 Este proyecto todavia no tiene licencia, está por ver.
