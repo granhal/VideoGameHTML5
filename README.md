@@ -8,7 +8,7 @@ Este proyecto esta desarrollado con THREE.JS http://threejs.org/
 
 - Introducción:
 
-Este proyecto nace bajo la idea de crear una rama del proyecto embrion www.embrion.es donde colaboro activamente.
+Este proyecto nace bajo la idea de crear una rama del proyecto embrion www.embrion.es donde colaboro activamente para fusionar historias y tramas.
 
 - Desarrollo:
 
