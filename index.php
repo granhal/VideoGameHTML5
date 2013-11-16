@@ -6,13 +6,13 @@
 
 		<script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
 		<link rel="shortcut icon" href="img/favicon.gif" type="image/gif">
-		<title>html5 videogame</title>
+		<title>Embrion MMO GALAXY BROWSER VIDEOGAME</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
 <!-- css -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<!-- fonts 
-		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>-->
+<!-- fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
 <!-- js -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
@@ -59,7 +59,18 @@ body{
 	font-weight:bold;
 	overflow:hidden;
 }
+div#menuSuperior{
+	width:99%; 
+	height:80px; 
+	position:fixed; 
+	overflow:hidden; 
+	font-size: 15px;
+	color:white;
+	background-color: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    padding: 5px;
 
+}
 div#menuInferior{
 	width:99%; 
 	height:30px; 
@@ -81,7 +92,7 @@ div#controles{
     background : rgba(255, 255, 255, 0.2);
     margin:auto;
     left:10px;
-	top:290px;
+	top:180px;
     z-index: 10;
     padding: 8px;
     line-height:15px;
@@ -91,10 +102,10 @@ div#creditos{
 	font-size: 10px;
 	position:fixed;
 	width:235px;
-	height:25px;
+	height:155px;
 	background:rgba(255, 255, 255, 0.2);
 	left:10px;
-	top:450px;
+	top:350px;
 	vertical-align: 1px;
 	z-index: 10;
 	line-height:15px;
@@ -102,7 +113,10 @@ div#creditos{
 		</style>
 	</head>
 
-<body style="">
+<body>
+<div id="menuSuperior" class="text-right">
+	<img src="logo.png" width="30%" >
+</div>
 <div id="controles" style="font-size:9px;">
 	<button class="close" id="cerrarControles">&times;</button>
 	<span style="font-size:22px">Controles</span><br> 
@@ -120,18 +134,29 @@ div#creditos{
 </div>
 <div id="creditos">
 	<button class="close" id="cerrarCreditos">&times;</button>
-	<span style="font-size:12px">Créditos</span><br>
-		v.0.0.107 alfa - más info en: <a href="https://github.com/granhal/VideoGameHTML5">Github</a>
+	<span style="font-size:14px">Créditos</span><br>
+	<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
+		v.0.0.107 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
+		<p class="text-center">
+			<a href="http://www.cantelymedia.com" target="_blank"><img src="cantelymedia.jpg" width="30%"></a>&nbsp;&nbsp;&nbsp;
+			<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
+		</p>
 </div>
 <div id="container"></div>
 <div id="menuInferior"> 
 	<button class="close" id="cerrarMenuInferior">&times;</button>
 	<button class="btn btn-inverse" id="verControles"> ver controles</button>
  	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
+ 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
  </div>
 
 <script>
 		$(function() {
+			$("button#verSalirUniverso").click(function(){
+				var pagina = 'http://cantely.com/demo/lab3dviewver/';
+				document.location.href=pagina;
+
+			});
 			$("button#verControles").click(function(){
 				$("div#controles").show();
 			});
