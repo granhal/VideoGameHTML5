@@ -1,4 +1,4 @@
-function planet(){
+		function planet(){
 				var cloudsTexture   = THREE.ImageUtils.loadTexture( "textures/planets/earth_clouds_1024.png" );
 				var planetTexture   = THREE.ImageUtils.loadTexture( "textures/planets/earth_atmos_2048.jpg" );			
 				var normalTexture   = THREE.ImageUtils.loadTexture( "textures/planets/earth_normal_2048.jpg" );
@@ -47,4 +47,4 @@ function planet(){
 				meshClouds.scale.set( cloudsScale, cloudsScale, cloudsScale );
 				meshClouds.rotation.z = tilt;
 				scene.add( meshClouds );
-}
+		}

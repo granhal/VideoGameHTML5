@@ -1,16 +1,26 @@
 <!doctype html>
 <html lang="es-ES">
 	<head>
+
+		<meta charset="utf-8">
+		<meta name="robots" content="index, follow" />
+		<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+		<meta content='Embrion' name='application-name'/>
+		<meta content='Embrion MMO GALAXY BROWSER VIDEOGAME HTML5' name='msapplication-tooltip'/>
+		<meta content='http://cantely.com/demo/lab3d/' name='msapplication-starturl'/>
+		<meta content='black' name='msapplication-navbutton-color'/>
+		<meta content='name=HTML5 - Etiqueta Meta;action-uri=http://cantely.com/demo/lab3d/'/>		 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="html5" value="notranslate">
 		<meta name="description" content="html5 videogame">
+		<meta name="Author" content="@granhal">
+		<link rel="shortcut icon" href="favicon.ico" />
 
-		<script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
-		<link rel="shortcut icon" href="img/favicon.gif" type="image/gif">
-		<title>Embrion MMO GALAXY BROWSER VIDEOGAME</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+		<title>embrion MMO GALAXY BROWSER VIDEOGAME HTML5</title>
+
 <!-- css -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/ui.css" rel="stylesheet" media="screen">
 <!-- fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
 <!-- js -->
@@ -45,112 +55,52 @@
 		<script src="engine/moon.js"></script>
 		<script src="engine/planet.js"></script>
 		<script src="engine/particulas.js"></script>
-		<!--<script src="engine/crearProvidence.js"></script>-->
 		<script src="js/effects/OculusRiftEffect.js"></script>
 
 		<style>
-body{
-	font-family: 'Aldrich', sans-serif;
-	color: white;
-	background:#000;
-	color: #eee;
-	padding:0;
-	margin:0;
-	font-weight:bold;
-	overflow:hidden;
-}
-div#menuSuperior{
-	width:99%; 
-	height:80px; 
-	position:fixed; 
-	overflow:hidden; 
-	font-size: 15px;
-	color:white;
-	background-color: rgba(255, 255, 255, 0.1);
-    z-index: 10;
-    padding: 5px;
 
-}
-div#menuInferior{
-	width:99%; 
-	height:30px; 
-	position:fixed; 
-	bottom:0; 
-	right:0; 
-	left:0; 
-	overflow:hidden; 
-	font-size: 15px;
-	color:white;
-	background-color: rgba(255, 255, 255, 0.2);
-    z-index: 10;
-    padding: 5px;
-}
-div#controles{
-	width:235px;
-	height:130px;
-	position:fixed;
-    background : rgba(255, 255, 255, 0.2);
-    margin:auto;
-    left:10px;
-	top:180px;
-    z-index: 10;
-    padding: 8px;
-    line-height:15px;
-}
-div#creditos{
-	padding: 8px;
-	font-size: 10px;
-	position:fixed;
-	width:235px;
-	height:155px;
-	background:rgba(255, 255, 255, 0.2);
-	left:10px;
-	top:350px;
-	vertical-align: 1px;
-	z-index: 10;
-	line-height:15px;
-}
 		</style>
 	</head>
 
-<body>
-<div id="menuSuperior" class="text-right">
-	<img src="logo.png" width="30%" >
-</div>
-<div id="controles" style="font-size:9px;">
-	<button class="close" id="cerrarControles">&times;</button>
-	<span style="font-size:22px">Controles</span><br> 
-	<span style="color:#0CF">A</span>: Girar izquierda<br>
-	<span style="color:#0CF">S</span>: Descelerar<br>
-	<span style="color:#0CF">D</span>: Girar derecha<br>
-	<span style="color:#0CF">W</span>: Acelerar<br> 
-	<span style="color:#0CF">Q</span>: Bajar<br>
-	<span style="color:#0CF">E</span>: Subir<br> 
-	<span style="color:#0CF">Shift</span>: Turbo <br>
-	<span style="color:#0CF">Arrastrar ratón</span>: Girar <br>
-</div>
-<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px;">
-		<p>Velocidad: <span id="test"></span> m/s</p>
-</div>
-<div id="creditos">
-	<button class="close" id="cerrarCreditos">&times;</button>
-	<span style="font-size:14px">Créditos</span><br>
-	<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
-		v.0.0.107 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
-		<p class="text-center">
-			<a href="http://www.cantelymedia.com" target="_blank"><img src="cantelymedia.jpg" width="30%"></a>&nbsp;&nbsp;&nbsp;
-			<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
-		</p>
-</div>
-<div id="container"></div>
-<div id="menuInferior"> 
-	<button class="close" id="cerrarMenuInferior">&times;</button>
-	<button class="btn btn-inverse" id="verControles"> ver controles</button>
- 	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
- 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
- </div>
+	<body>
 
-<script>
+		<div id="menuSuperior" class="text-right">
+			<img src="logo.png" width="30%" >
+		</div>
+		<div id="controles" style="font-size:9px;">
+			<button class="close" id="cerrarControles">&times;</button>
+			<span style="font-size:22px">Controles</span><br> 
+			<span style="color:#0CF">A</span>: Girar izquierda<br>
+			<span style="color:#0CF">S</span>: Descelerar<br>
+			<span style="color:#0CF">D</span>: Girar derecha<br>
+			<span style="color:#0CF">W</span>: Acelerar<br> 
+			<span style="color:#0CF">Q</span>: Bajar<br>
+			<span style="color:#0CF">E</span>: Subir<br> 
+			<span style="color:#0CF">Shift</span>: Turbo <br>
+			<span style="color:#0CF">Arrastrar ratón</span>: Girar <br>
+		</div>
+		<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px;">
+				<p>Velocidad: <span id="test"></span> m/s</p>
+		</div>
+		<div id="creditos">
+			<button class="close" id="cerrarCreditos">&times;</button>
+			<span style="font-size:14px">Créditos</span><br>
+			<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
+				v.0.0.107 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
+				<p class="text-center">
+					<a href="http://www.cantelymedia.com" target="_blank"><img src="cantelymedia.jpg" width="30%"></a>&nbsp;&nbsp;&nbsp;
+					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
+				</p>
+		</div>
+		<div id="container"></div>
+		<div id="menuInferior"> 
+			<button class="close" id="cerrarMenuInferior">&times;</button>
+			<button class="btn btn-inverse" id="verControles"> ver controles</button>
+		 	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
+		 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
+		 </div>
+
+	<script>
 		$(function() {
 			$("button#verSalirUniverso").click(function(){
 				var pagina = 'http://cantely.com/demo/lab3dviewver/';
@@ -208,7 +158,7 @@ div#creditos{
 			animate();	
 
 
-function init() {
+		function init() {
 
 				container = document.createElement('div');
 				document.body.appendChild( container );
@@ -232,12 +182,12 @@ function init() {
 				scene.add(light);
 
 
-		renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        renderer.sortObjects = false;
-        renderer.autoClear = false;
-        renderer.setClearColor(new THREE.Color(0x000000));
-        container.appendChild( renderer.domElement );
+				renderer = new THREE.WebGLRenderer();
+		        renderer.setSize( window.innerWidth, window.innerHeight );
+		        renderer.sortObjects = false;
+		        renderer.autoClear = false;
+		        renderer.setClearColor(new THREE.Color(0x000000));
+		        container.appendChild( renderer.domElement );
 				
 				planet();
 				moon();
@@ -254,9 +204,9 @@ function init() {
 				});*/
 				
 				window.addEventListener( 'resize', onWindowResize, false );
-}   
+		}   
 
-function animate() {
+		function animate() {
 				
 				requestAnimationFrame( animate );
 				render();
@@ -264,18 +214,13 @@ function animate() {
 				stats.update();
 				stats2.update();
 
-}
+		}
 
-function render() {
-		                        
-            					
-				// rotate the planet and clouds
-
+		function render() {
+		                        			
 				var delta = clock.getDelta();
 				meshPlanet.rotation.y += rotationSpeed * delta;
 				meshClouds.rotation.y += 5 * rotationSpeed * delta;
-
-				// slow down as we approach the surface
 
 				dPlanet = camera.position.length();
 
@@ -317,10 +262,7 @@ function render() {
 				controlsnave.update( delta );
 				composer.render( delta );
 
-				
-
-}
-
+		}
 
 		</script>
 

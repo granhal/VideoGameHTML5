@@ -1,5 +1,5 @@
-function fragata(){
-
+		
+		function fragata(){
 
 				texture = new THREE.Texture();
 				loadTexture = new THREE.ImageLoader();
@@ -40,11 +40,8 @@ function fragata(){
 					particles.position.set(24,1,0);
 					particles.scale.set(0.00009,0.00009,0.00009);
 					
-
-
-
-
 				});
+
 			console.log("fragata cargada");
 
-};
+		};

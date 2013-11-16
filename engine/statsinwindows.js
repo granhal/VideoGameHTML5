@@ -1,4 +1,4 @@
-function statsinwindows(){
+		function statsinwindows(){
 				stats = new Stats();
 				stats.setMode(1); // 0: fps, 1: ms
 
@@ -18,4 +18,4 @@ function statsinwindows(){
 				stats2.domElement.style.top = '100px';
 
 				container.appendChild( stats2.domElement );
-}
+		}

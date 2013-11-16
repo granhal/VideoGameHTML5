@@ -1,5 +1,5 @@
 
-function particulas(){
+		function particulas(){
 			var container, stats;
 			var particles, geometry, materials = [], i, h, color, sprite, size;
 			
@@ -66,4 +66,4 @@ function particulas(){
 
 
 			}
-};
+		};

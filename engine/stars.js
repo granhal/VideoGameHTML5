@@ -1,4 +1,4 @@
-function starts(){
+		function starts(){
 
 				var i, r = radius, starsGeometry = [ new THREE.Geometry(), new THREE.Geometry() ];
 
@@ -53,4 +53,4 @@ function starts(){
 					scene.add( stars );
 
 				}
-}
+		}
