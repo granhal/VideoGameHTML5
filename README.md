@@ -1,7 +1,7 @@
 VideoGameHTML5 Español
 ======================
 DEMO DEL JUEGO: http://cantely.com/demo/lab3d/ (esta en desarrollo).<br>
-NAVE USADA POR AHORA: http://www.turbosquid.com/3d-models/free-3ds-mode-space/588767
+NAVE USADA POR AHORA: http://cantely.com/demo/lab3dviewer/ (esta en desarrollo).<br>
 
 Videojuego HTML5 MMO de naves espaciales, crafting, comercio, pvp, real-time.
 Este proyecto esta desarrollado con THREE.JS http://threejs.org/
@@ -29,6 +29,7 @@ Una vez el jugador este registrado y alla elegido esas opciones *(básicas por e
   - Three.js r62 http://github.com/mrdoob/three.js
     - build completa
   - jquery.min.js v1.10.2 http://jquery.org
+  - jquery-ui.min.js v1.10.3 http://jqueryui.com/
   - bootstrap.min.js - http://getbootstrap.com/2.3.2/javascript.html#transitions
   - dat-gui JavaScript Controller Library - http://code.google.com/p/dat-gui
   - stats.js - http://github.com/mrdoob/stats.js
