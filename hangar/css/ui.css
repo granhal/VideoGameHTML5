@@ -1,0 +1,61 @@
+body{
+	font-family: 'Aldrich', sans-serif;
+	color: white;
+	background:#000;
+	color: #eee;
+	padding:0;
+	margin:0;
+	font-weight:bold;
+	overflow:hidden;
+}
+div#menuSuperior{
+	width:99%; 
+	height:80px; 
+	position:fixed; 
+	overflow:hidden; 
+	font-size: 15px;
+	color:white;
+	background-color: rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 5px;
+
+}
+div#menuInferior{
+	width:99%; 
+	height:30px; 
+	position:fixed; 
+	bottom:0; 
+	right:0; 
+	left:0; 
+	overflow:hidden; 
+	font-size: 15px;
+	color:white;
+	background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 5px;
+}
+div#caracteristicas{
+	width:235px;
+	height:150px;
+	position:fixed;
+    background : rgba(0, 0, 0, 0.2);
+    margin:auto;
+    left:10px;
+	top:160px;
+    z-index: 10;
+    padding: 8px;
+    line-height:15px;
+}
+div#creditos{
+	padding: 8px;
+	font-size: 10px;
+	position:fixed;
+	width:235px;
+	height:155px;
+	background:rgba(0, 0, 0, 0.2);
+	left:10px;
+	top:350px;
+	vertical-align: 1px;
+	z-index: 10;
+	line-height:15px;
+}
