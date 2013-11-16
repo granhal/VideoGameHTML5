@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-ES">
 	<head>
 		<meta name="html5" value="notranslate">
 		<meta name="description" content="html5 videogame">
@@ -15,11 +15,11 @@
 		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>-->
 <!-- js -->
 		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 
 		<script src="js/three.min.js"></script>
-
-
+		
 		<script src="js/controls/FlyControls.js"></script>
 
 		<script src="js/shaders/CopyShader.js"></script>
@@ -52,30 +52,17 @@
 body{
 	font-family: 'Aldrich', sans-serif;
 	color: white;
-
 	background:#000;
 	color: #eee;
 	padding:0;
 	margin:0;
 	font-weight:bold;
 	overflow:hidden;
-
 }
 
-#menuSuperior{
-	width:100%;
-	height:90px;
-	position:fixed;
-    background : rgba(255, 255, 255, 0.2);
-    min-width: 750px;
-    max-width: 100%;
-    margin:auto;
-    z-index: 1;
-}
-
-#menuInferior{
-	width:100%; 
-	height:10%; 
+div#menuInferior{
+	width:99%; 
+	height:30px; 
 	position:fixed; 
 	bottom:0; 
 	right:0; 
@@ -84,30 +71,88 @@ body{
 	font-size: 15px;
 	color:white;
 	background-color: rgba(255, 255, 255, 0.2);
-	z-index: 1;
+    z-index: 10;
+    padding: 5px;
+}
+div#controles{
+	width:235px;
+	height:130px;
+	position:fixed;
+    background : rgba(255, 255, 255, 0.2);
+    margin:auto;
+    left:10px;
+	top:290px;
+    z-index: 10;
+    padding: 8px;
+    line-height:15px;
+}
+div#creditos{
+	padding: 8px;
+	font-size: 10px;
+	position:fixed;
+	width:235px;
+	height:25px;
+	background:rgba(255, 255, 255, 0.2);
+	left:10px;
+	top:450px;
+	vertical-align: 1px;
+	z-index: 10;
+	line-height:15px;
 }
 		</style>
 	</head>
 
 <body style="">
-<div id="menuSuperior">
-	<span style="font-size:24px">Controles</span><br> 
-	<span style="color:#0CF">A</span>: Girar izquierda, 
-	<span style="color:#0CF">S</span>: Descelerar, 
-	<span style="color:#0CF">D</span>: Girar derecha, 
+<div id="controles" style="font-size:9px;">
+	<button class="close" id="cerrarControles">&times;</button>
+	<span style="font-size:22px">Controles</span><br> 
+	<span style="color:#0CF">A</span>: Girar izquierda<br>
+	<span style="color:#0CF">S</span>: Descelerar<br>
+	<span style="color:#0CF">D</span>: Girar derecha<br>
 	<span style="color:#0CF">W</span>: Acelerar<br> 
-	<span style="color:#0CF">Q</span>: Bajar, 
-	<span style="color:#0CF">E</span>: Subir<br> <span style="color:#0CF">Shift</span>: Turbo, <span style="color:#0CF">Ratón</span>: girar <br>
-	<div id="velocidad" style="margin-top:150px; position:relative;"></div>
-	<!--<button id="botonoculus">activar oculusrift</button><br>-->
-	<p>Velocidad: <span id="test"></span> m/s</p>
+	<span style="color:#0CF">Q</span>: Bajar<br>
+	<span style="color:#0CF">E</span>: Subir<br> 
+	<span style="color:#0CF">Shift</span>: Turbo <br>
+	<span style="color:#0CF">Arrastrar ratón</span>: Girar <br>
 </div>
-	
-  <div id="container">
-    </div>
-<script>
+<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px;">
+		<p>Velocidad: <span id="test"></span> m/s</p>
+</div>
+<div id="creditos">
+	<button class="close" id="cerrarCreditos">&times;</button>
+	<span style="font-size:12px">Créditos</span><br>
+		v.0.0.107 alfa - más info en: <a href="https://github.com/granhal/VideoGameHTML5">Github</a>
+</div>
+<div id="container"></div>
+<div id="menuInferior"> 
+	<button class="close" id="cerrarMenuInferior">&times;</button>
+	<button class="btn btn-inverse" id="verControles"> ver controles</button>
+ 	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
+ </div>
 
- 
+<script>
+		$(function() {
+			$("button#verControles").click(function(){
+				$("div#controles").show();
+			});
+			$("button#verCreditos").click(function(){
+				$("div#creditos").show();
+			});		
+			$( "div#controles" ).draggable();
+			$( "div#creditos" ).draggable();
+			$("button#cerrarControles").click(function(){
+				$("div#controles").hide();
+			});
+			$("button#cerrarCreditos").click(function(){
+				$("div#creditos").hide();
+			});
+			$("button#cerrarMenuInferior").click(function(){
+				$("div#menuInferior").hide();
+			});
+		});
+
+
+
         if (!Detector.webgl) {
 
             Detector.addGetWebGLMessage();
