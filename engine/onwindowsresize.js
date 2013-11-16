@@ -1,13 +1,15 @@
 function onWindowResize( event ) {
 
-				SCREEN_HEIGHT = window.innerHeight;
-				SCREEN_WIDTH  = window.innerWidth;
 
-				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+                                SCREEN_HEIGHT = window.innerHeight;
+                                SCREEN_WIDTH  = window.innerWidth;
 
-				camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
-				camera.updateProjectionMatrix();
+                                renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
-				composer.reset();
+                                camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+                                camera.updateProjectionMatrix();
+
+                                //composer.reset();
+				 	
 
 }

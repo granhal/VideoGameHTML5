@@ -2,7 +2,7 @@
 function particulas(){
 			var container, stats;
 			var particles, geometry, materials = [], i, h, color, sprite, size;
-			animateParticulas();
+			
 
 				geometry = new THREE.Geometry();
 				sprite1 = THREE.ImageUtils.loadTexture( "textures/sprites/fire.png" );
@@ -43,20 +43,12 @@ function particulas(){
 
 					this.particles = new THREE.ParticleSystem( geometry, materials[i] );
 
-					
-					//scene.add( particles );
 
 				}
 			
-			function animateParticulas() {
 
-				requestAnimationFrame( animateParticulas );
-				renderar();
 
-			}
-
-			//var renderer = new THREE.WebGLRenderer( { clearAlpha: 1 } );
-			function renderar() {
+			this.renderParticulas = function renderar() {
 
 				var time = Date.now() * 0.00005;
 				for ( i = 0; i < scene.children.length; i ++ ) {
@@ -72,7 +64,6 @@ function particulas(){
 					materials[i].color.setHSL( h, color[1], color[2] );
 				}
 
-				//renderer.renderar( scene, camera );
 
 			}
 };
