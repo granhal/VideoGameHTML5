@@ -22,21 +22,18 @@ Una vez el jugador este registrado y alla elegido esas opciones *(básicas por e
   - JAVASCRIPT 1.8.5
   - CSS 3
   - ¿ PHP o NODEJS ? por definir.
-  - ¿ MYSQL 5.6 o MONGODB ? por definir.
+  - ¿ MYSQL o MONGODB ? por definir.
 
 - Librerias javascript usadas para este proyecto:
-
-  - bootstrap.js v2.3.2 http://getbootstrap.com/2.3.2/javascript.html#transitions 
-  - bootstrap.min.js - http://getbootstrap.com/2.3.2/javascript.html#transitions
-  - jquery.min.js v1.10.2 http://jquery.org
+- 
   - Three.js r62 http://github.com/mrdoob/three.js
-    - controls - @author James Baicoianu / http://www.baicoianu.com/
-    - libs - http://github.com/mrdoob/stats.js
-    - loaders - @author Alexander Gessler / http://www.greentoken.de/
-    - postprocessing - @author alteredq / http://alteredqualia.com/
-    - shaders - @author alteredq / http://alteredqualia.com/
-    - detector.js - @author alteredq / http://alteredqualia.com/
-    - OBJLoader.js @author mrdoob / http://mrdoob.com/
+    - build completa
+  - jquery.min.js v1.10.2 http://jquery.org
+  - bootstrap.min.js - http://getbootstrap.com/2.3.2/javascript.html#transitions
+  - dat-gui JavaScript Controller Library - http://code.google.com/p/dat-gui
+  - stats.js - http://github.com/mrdoob/stats.js
+  - system.js - http://github.com/mrdoob/system.js
+  - tween.js - http://github.com/sole/tween.js
 
 - Cosas por hacer:
 
