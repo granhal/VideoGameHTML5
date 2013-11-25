@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="es-ES">
 	<head>
-
 		<meta charset="utf-8">
 		<meta name="robots" content="index, follow" />
 		<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
@@ -42,11 +41,12 @@
 		<script src="js/postprocessing/FilmPass.js"></script>
 		<script src="js/loaders/OBJLoader.js"></script>
 		<script src="js/loaders/MTLLoader.js"></script>
+		<!--<script src="js/loaders/ColladaLoader.js"></script>
+		<script src="js/loaders/AssimpJSONLoader.js"></script>
+		<script src="js/effects/OculusRiftEffect.js"></script>-->
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
-		<!--<script src="js/loaders/ColladaLoader.js"></script>-->
-		<script src="js/loaders/AssimpJSONLoader.js"></script>
 
 		<script src="engine/onwindowsresize.js"></script>
 		<script src="engine/fragata.js"></script>
@@ -55,16 +55,8 @@
 		<script src="engine/stars.js"></script>
 		<script src="engine/moon.js"></script>
 		<script src="engine/planet.js"></script>
-		<script src="engine/particulas.js"></script>
-		<script src="js/effects/OculusRiftEffect.js"></script>
-
-		<style>
-
-		</style>
 	</head>
-
 	<body>
-
 		<div id="menuSuperior" class="text-right">
 			<img src="logo.png" width="30%" >
 		</div>
@@ -94,7 +86,6 @@
 					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
 				</p>
 		</div>
-
 		<div id="radar" >
 			<button class="close" id="cerrarRadar">&times;</button>
 			<span style="font-size:14px">Radar</span>
@@ -155,90 +146,70 @@
 			$("button#verSalirUniverso").click(function(){
 				var pagina = 'http://cantely.com/demo/lab3dviewver/';
 				document.location.href=pagina;
-
 			});
 
 			$("button#verControles").click(function(){
-				$("div#controles").show();
+				$( "div#controles" ).toggle("fold");
 			});
+
 			$("button#verCreditos").click(function(){
-				$("div#creditos").show();
+				$("div#creditos").toggle("fold");
 			});	
+
 			$("button#verRadar").click(function(){
-				$("div#radar").show();
+				$("div#radar").toggle("fold");
 			});	
+
 			$("div#radar").draggable();
 			$("div#controles").draggable();
 			$("div#creditos").draggable();
+
 			$("button#cerrarControles").click(function(){
 				$("div#controles").hide();
 			});
+
 			$("button#cerrarCreditos").click(function(){
 				$("div#creditos").hide();
 			});
+
 			$("button#cerrarRadar").click(function(){
 				$("div#radar").hide();
 			});
+
 			$("button#cerrarMenuInferior").click(function(){
 				$("div#menuInferior").hide();
 			});
+
 		});
 
 
-
         if (!Detector.webgl) {
-
             Detector.addGetWebGLMessage();
             document.getElementById('container').innerHTML = "";
-
         }
-			//radio
-			var radius = 7371;
 
-			var tilt = 0.41;
-			//velocidad de rotacion de las nubes
-			var rotationSpeed = 0.02;
-			//escala de las nubes
-			var cloudsScale = 1.1;
-			//escala de la luna
-			var moonScale = 0.50;
-
-			var container, stats, stats2;
-			var camera, controls, scene, sceneCube, renderer;
-			var geometry, meshPlanet, meshClouds, meshMoon, meshProvidence;
-			var dirLight, pointLight, ambientLight, light;
-			var objecto2, object, effect;
-			var controlsnave, cameraTarget;
-			var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
-			this.clock = new THREE.Clock();
+		var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
+		this.clock = new THREE.Clock();
 			
-			init();
-			animate();	
+		init();
+		animate();	
 
 
 		function init() {
-
 				container = document.createElement('div');
 				document.body.appendChild( container );
 
-			
 				this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1e7 );
 
 				this.scene = new THREE.Scene();
-				//scene.fog = new THREE.FogExp2( 0x000000, 0.00000019 );
-				//scene.add( camera );
+				scene.fog = new THREE.FogExp2( 0x000000, 0.00000011 );
 
 				dirLight = new THREE.DirectionalLight( 0xc2c2c2 );
-				dirLight.position.set( 20, 0, 1 ).normalize();
+				dirLight.position.set( 2000, 1000, 1 ).normalize();
 				scene.add( dirLight );
 
 				ambientLight = new THREE.AmbientLight( 0x4f3f1f );
 				scene.add( ambientLight );
-
-				light = new THREE.Light(0x333333);
-				light.position.set( -1, 0, 1 ).normalize();
-				scene.add(light);
-
 
 				renderer = new THREE.WebGLRenderer();
 		        renderer.setSize( window.innerWidth, window.innerHeight );
@@ -257,7 +228,6 @@
 				fragata();
 				motor();
 
-
 				/*$("#botonoculus").click(function(){
 					  effect = new THREE.OculusRiftEffect( renderer, {worldScale: 10000} );
 					  effect.setSize( window.innerWidth, window.innerHeight );
@@ -267,30 +237,17 @@
 		}   
 
 		function animate() {
-				
 				requestAnimationFrame( animate );
 				render();
 				//renderParticulas();
 				stats.update();
 				stats2.update();
-
 		}
 
-		function render() {
-		                        			
+		function render() {         			
 				var delta = clock.getDelta();
-				meshPlanet.rotation.y += rotationSpeed * delta;
-				meshClouds.rotation.y += 5 * rotationSpeed * delta;
-
-				dPlanet = camera.position.length();
-
-				dMoonVec.subVectors( camera.position, meshMoon.position );
-				dMoon = dMoonVec.length();
-				if ( dMoon < dPlanet ) {
-					d = ( dMoon - radius * moonScale * 1.01 );
-				} else {
-					d = ( dPlanet - radius * 1.01 );
-				}
+				meshPlanet.rotation.y += 0.02 * delta;
+				meshClouds.rotation.y += 5 * 0.02 * delta;
 
 				particles.rotation.z += 0.009;
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
@@ -337,11 +294,8 @@
 				//controlsnave.movementSpeed = 1.33 * d;
 				controlsnave.update( delta );
 				composer.render( delta );
-
 		}
 
 		</script>
-
-
 </body>
 </html>

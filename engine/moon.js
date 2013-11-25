@@ -57,9 +57,6 @@
 					console.log("tubo cargado");
 		}
 
-
-
-
 		function particulastubo(){
 			var container, stats;
 			var particles, geometry, materials = [], i, h, color, sprite, size;

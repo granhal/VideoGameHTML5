@@ -1,6 +1,6 @@
 		function starts(){
 
-				var i, r = radius, starsGeometry = [ new THREE.Geometry(), new THREE.Geometry() ];
+				var i, r = 7371, starsGeometry = [ new THREE.Geometry(), new THREE.Geometry() ];
 
 				for ( i = 0; i < 350; i ++ ) {
 

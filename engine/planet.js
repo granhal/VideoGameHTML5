@@ -40,11 +40,11 @@
 
 				this.meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
 				meshPlanet.rotation.y = 0;
-				meshPlanet.rotation.z = tilt;
+				meshPlanet.rotation.z = 0.41;
 				scene.add( meshPlanet );
 
 				meshClouds = new THREE.Mesh( geometry, materialClouds );
-				meshClouds.scale.set( cloudsScale, cloudsScale, cloudsScale );
-				meshClouds.rotation.z = tilt;
+				meshClouds.scale.set( 1.1, 1.1, 1.1 );
+				meshClouds.rotation.z = 0.41;
 				scene.add( meshClouds );
 		}
