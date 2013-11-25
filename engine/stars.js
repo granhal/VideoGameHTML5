@@ -2,7 +2,7 @@
 
 				var i, r = radius, starsGeometry = [ new THREE.Geometry(), new THREE.Geometry() ];
 
-				for ( i = 0; i < 250; i ++ ) {
+				for ( i = 0; i < 350; i ++ ) {
 
 					var vertex = new THREE.Vector3();
 					vertex.x = Math.random() * 2 - 1;
@@ -28,26 +28,26 @@
 
 				var stars;
 				var starsMaterials = [
-					new THREE.ParticleSystemMaterial( { color: 0x97c5ca, size: 0.9, sizeAttenuation: false } ),
-					new THREE.ParticleSystemMaterial( { color: 0x8474b4, size: 1, sizeAttenuation: false } ),
-					new THREE.ParticleSystemMaterial( { color: 0x634b4b, size: 1.8, sizeAttenuation: false } ),
-					new THREE.ParticleSystemMaterial( { color: 0x947c4e, size: 1.5, sizeAttenuation: false } ),
-					new THREE.ParticleSystemMaterial( { color: 0x4f5b2a, size: 2, sizeAttenuation: false } ),
-					new THREE.ParticleSystemMaterial( { color: 0x6c6607, size: 1, sizeAttenuation: false } )
+					new THREE.ParticleSystemMaterial( { color: 0x97c5ca, size: 0.9, sizeAttenuation: true } ),
+					new THREE.ParticleSystemMaterial( { color: 0x8474b4, size: 1, sizeAttenuation: true } ),
+					new THREE.ParticleSystemMaterial( { color: 0x634b4b, size: 1.8, sizeAttenuation: true } ),
+					new THREE.ParticleSystemMaterial( { color: 0x947c4e, size: 1.5, sizeAttenuation: true } ),
+					new THREE.ParticleSystemMaterial( { color: 0x4f5b2a, size: 2, sizeAttenuation: true } ),
+					new THREE.ParticleSystemMaterial( { color: 0x6c6607, size: 1, sizeAttenuation: true } )
 				];
 
-				for ( i = 10; i < 30; i ++ ) {
+				for ( i = 10; i < 40; i ++ ) {
 
 					stars = new THREE.ParticleSystem( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
 
-					stars.rotation.x = Math.random() * 6;
-					stars.rotation.y = Math.random() * 6;
-					stars.rotation.z = Math.random() * 6;
+					stars.rotation.x = Math.random() * 15;
+					stars.rotation.y = Math.random() * 10;
+					stars.rotation.z = Math.random() * 5;
 
-					s = i * 5;
+					s = i * 6;
 					stars.scale.set( s, s, s );
 
-					stars.matrixAutoUpdate = false;
+					stars.matrixAutoUpdate = true;
 					stars.updateMatrix();
 
 					scene.add( stars );

@@ -16,7 +16,7 @@
 		<meta name="Author" content="@granhal">
 		<link rel="shortcut icon" href="favicon.ico" />
 
-		<title>embrion MMO GALAXY BROWSER VIDEOGAME HTML5</title>
+		<title>embrion mmo galaxy browser video-game html5</title>
 
 <!-- css -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -40,7 +40,8 @@
 		<script src="js/postprocessing/MaskPass.js"></script>
 		<script src="js/postprocessing/RenderPass.js"></script>
 		<script src="js/postprocessing/FilmPass.js"></script>
-		<script src="js/OBJLoader.js"></script>
+		<script src="js/loaders/OBJLoader.js"></script>
+		<script src="js/loaders/MTLLoader.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
@@ -79,11 +80,12 @@
 			<span style="color:#0CF">Shift</span>: Turbo <br>
 			<span style="color:#0CF">Arrastrar ratón</span>: Girar <br>
 		</div>
-		<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px;">
-				<p>Velocidad: <span id="test"></span> m/s</p>
+		<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px; line-height:10px;">
+				<p>Velocidad: <span id="velocidadReal"></span> m/s</p>
+				<p>Posición: <span id="posicion"></span></p>
 		</div>
 		<div id="creditos">
-			<button class="close" id="cerrarCreditos">&times;</button>
+			<button class="close" id="cerrarCreditos" >&times;</button>
 			<span style="font-size:14px">Créditos</span><br>
 			<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
 				v.0.0.107 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
@@ -92,9 +94,57 @@
 					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
 				</p>
 		</div>
+
+		<div id="radar" >
+			<button class="close" id="cerrarRadar">&times;</button>
+			<span style="font-size:14px">Radar</span>
+			<table class="table table-condensed" style="font-size:8px;">
+			  	<tr>
+  				    <td>Target</td>
+    				<td>Distancia</td>
+    				<td></td>
+    				<td>Opciones</td>
+    			</tr>
+  				<tr>
+  				    <td>Tierra</td>
+    				<td><span id="distanciaPlaneta"></span> Km.</td>
+    				<td><i class="icon-globe icon-white"></i></td>
+    				<td>
+						<div class="btn-group">
+						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="#" style="font-size:8px;"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-screenshot"></i> Atacar</a></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-info-sign"></i> Info</a></li>
+						  </ul>
+						</div>
+					</td>
+    			</tr>
+    			<tr>
+    				<td>Luna</td>
+    				<td><span id="distanciaMoon"></span> Km.</td>
+    				<td><i class="icon-globe icon-white"></i></td>
+    				<td>
+    					<div class="btn-group">
+						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="#" style="font-size:8px;"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-screenshot"></i> Atacar</a></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#" style="font-size:8px;"><i class="icon-info-sign"></i> Info</a></li>
+						  </ul>
+						</div>
+    				</td>
+    			</tr>
+			</table>
+		</div>
 		<div id="container"></div>
 		<div id="menuInferior"> 
 			<button class="close" id="cerrarMenuInferior">&times;</button>
+			<button class="btn btn-inverse" id="verRadar"> ver radar</button>
 			<button class="btn btn-inverse" id="verControles"> ver controles</button>
 		 	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
 		 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
@@ -107,19 +157,27 @@
 				document.location.href=pagina;
 
 			});
+
 			$("button#verControles").click(function(){
 				$("div#controles").show();
 			});
 			$("button#verCreditos").click(function(){
 				$("div#creditos").show();
-			});		
-			$( "div#controles" ).draggable();
-			$( "div#creditos" ).draggable();
+			});	
+			$("button#verRadar").click(function(){
+				$("div#radar").show();
+			});	
+			$("div#radar").draggable();
+			$("div#controles").draggable();
+			$("div#creditos").draggable();
 			$("button#cerrarControles").click(function(){
 				$("div#controles").hide();
 			});
 			$("button#cerrarCreditos").click(function(){
 				$("div#creditos").hide();
+			});
+			$("button#cerrarRadar").click(function(){
+				$("div#radar").hide();
 			});
 			$("button#cerrarMenuInferior").click(function(){
 				$("div#menuInferior").hide();
@@ -136,7 +194,7 @@
         }
 			//radio
 			var radius = 7371;
-			//
+
 			var tilt = 0.41;
 			//velocidad de rotacion de las nubes
 			var rotationSpeed = 0.02;
@@ -167,7 +225,7 @@
 				this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1e7 );
 
 				this.scene = new THREE.Scene();
-				scene.fog = new THREE.FogExp2( 0x000000, 0.0000004 );
+				//scene.fog = new THREE.FogExp2( 0x000000, 0.00000019 );
 				//scene.add( camera );
 
 				dirLight = new THREE.DirectionalLight( 0xc2c2c2 );
@@ -184,20 +242,22 @@
 
 				renderer = new THREE.WebGLRenderer();
 		        renderer.setSize( window.innerWidth, window.innerHeight );
-		        renderer.sortObjects = false;
-		        renderer.autoClear = false;
+		        renderer.sortObjects = true;
+		        renderer.autoClear = true;
 		        renderer.setClearColor(new THREE.Color(0x000000));
 		        container.appendChild( renderer.domElement );
 				
 				planet();
 				moon();
+				tubo();
+				tuboOBJ();
 				starts();
 				statsinwindows();
 				prostprocessing();
 				fragata();
-				particulas();
+				motor();
 
-          
+
 				/*$("#botonoculus").click(function(){
 					  effect = new THREE.OculusRiftEffect( renderer, {worldScale: 10000} );
 					  effect.setSize( window.innerWidth, window.innerHeight );
@@ -210,7 +270,7 @@
 				
 				requestAnimationFrame( animate );
 				render();
-				renderParticulas();
+				//renderParticulas();
 				stats.update();
 				stats2.update();
 
@@ -238,15 +298,31 @@
 
 				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
 
-				$("#test").html(velocidadReal);
-				
+				$("#velocidadReal").html(velocidadReal);
+
+				var posicionXnave = Math.abs(nave.position.x);
+				var posicionYnave = Math.abs(nave.position.y);
+				var posicionZnave = Math.abs(nave.position.z);
+				var radioTierra = 6370/2;
+				var distanciaPlaneta = Math.sqrt(posicionZnave+posicionYnave+posicionXnave-radioTierra);
+
+				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta)+"K.");
+
+				var radioMoon = 1737/2;
+				var elevarXmoon = Math.pow(meshMoon.position.x-nave.position.x,2);
+				var elevarYmoon = Math.pow(meshMoon.position.y-nave.position.y,2);
+				var elevarZmoon = Math.pow(meshMoon.position.z-nave.position.z,2);
+				var resultadoDistanciaMoon = Math.sqrt(elevarXmoon+elevarYmoon+elevarZmoon-radioMoon);
+
+				$("#distanciaMoon").html(parseInt(resultadoDistanciaMoon/1000)+"K.");
+
+				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
+
 				if(velocidadReal >= 250){
-					//$("#test").html("velocidad maxima");
 					controlsnave.moveState.left = 2.50;
 					particles.rotation.z += 0.03;
 				};
 				if(velocidadReal <= -50){
-					//$("#test").html("velocidad maxima");
 					controlsnave.moveState.right = 0.50;
 					particles.rotation.z -= 0.03;
 				};

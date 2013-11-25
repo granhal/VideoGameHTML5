@@ -35,10 +35,10 @@
 				var materialNormalMap = new THREE.ShaderMaterial( parameters );
 
 
-				geometry = new THREE.SphereGeometry( radius*2, 35, 100 );
+				geometry = new THREE.SphereGeometry( 6370/2, 35, 100 );
 				geometry.computeTangents();
 
-				meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
+				this.meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
 				meshPlanet.rotation.y = 0;
 				meshPlanet.rotation.z = tilt;
 				scene.add( meshPlanet );

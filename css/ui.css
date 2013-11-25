@@ -59,3 +59,16 @@ div#creditos{
 	z-index: 10;
 	line-height:15px;
 }
+div#radar{
+	padding: 8px;
+	font-size: 10px;
+	position:fixed;
+	width:300px;
+	height:155px;
+	background:rgba(255, 255, 255, 0.2);
+	left:850px;
+	top:180px;
+	vertical-align: 1px;
+	z-index: 10;
+	line-height:15px;
+}
