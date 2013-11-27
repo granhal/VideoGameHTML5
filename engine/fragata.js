@@ -26,18 +26,14 @@
 					controlsnave.autoForward = false;
 					controlsnave.dragToLook = true;
 
-					camera.position.set(80,20,0);
 					//camera.rotation.set(0,1.6,0);
 
 					spacialship.add(camera);
 					spacialship.add(particles);
 
 					this.nave = spacialship;
-
-				
-					requestAnimationFrame( animate );
 					
-					particles.position.set(15,0,0);
+					particles.position.set(15,-1,0);
 					particles.rotation.set(0,0,0);
 					particles.scale.set(0.000009,0.000009,0.000009);
 					
@@ -84,22 +80,4 @@
 					this.particles = new THREE.ParticleSystem( geometry, materials[i] );
 				}
 			
-
-
-			this.renderParticulas = function renderar() {
-				var time = clock;
-				for ( i = 0; i < scene.children.length; i ++ ) {
-					var object = scene.children[ i ];
-					if ( object instanceof THREE.ParticleSystem ) {
-						object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
-					}
-				}
-				for ( i = 0; i < materials.length; i ++ ) {
-					color = parameters[i][0];
-					h = ( 360 * ( color[0] + time ) % 360 ) / 360;
-					materials[i].color.setHSL( h, color[1], color[2] );
-				}
-
-
-			}
 		};

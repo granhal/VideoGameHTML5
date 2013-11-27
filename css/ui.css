@@ -72,3 +72,16 @@ div#radar{
 	z-index: 10;
 	line-height:15px;
 }
+div#pilotoAutomatico{
+	padding: 8px;
+	font-size: 10px;
+	position:fixed;
+	width:170px;
+	height:15px;
+	background:rgba(255, 255, 255, 0.2);
+	left:850px;
+	top:130px;
+	vertical-align: 1px;
+	z-index: 10;
+	line-height:15px;
+}

@@ -87,6 +87,9 @@
 					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
 				</p>
 		</div>
+		<div id="pilotoAutomatico">
+		Piloto automático activado
+		</div>
 		<div id="radar" >
 			<button class="close" id="cerrarRadar">&times;</button>
 			<span style="font-size:14px">Radar</span>
@@ -105,9 +108,9 @@
 						<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
 						  <ul class="dropdown-menu">
-						    <li><a href="#" style="font-size:8px;"><i class="icon-map-marker"></i> Acercarse</a></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-screenshot"></i> Atacar</a></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li><a href="#" style="font-size:8px;" id="1" alt="1" class="acercarse"><i class="icon-map-marker"></i> Acercarse t</a></li>
+						    <li><a href="#" style="font-size:8px;" id="atacar"><i class="icon-screenshot"></i> Atacar</a></li>
+						    <li><a href="#" style="font-size:8px;" id="minear"><i class="icon-fullscreen"></i> Minear</a></li>
 						    <li class="divider"></li>
 						    <li><a href="#" style="font-size:8px;"><i class="icon-info-sign"></i> Info</a></li>
 						  </ul>
@@ -122,7 +125,7 @@
     					<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
 						  <ul class="dropdown-menu">
-						    <li><a href="#" style="font-size:8px;"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:8px;" id="2" alt="2" class="acercarse"><i class="icon-map-marker"></i> Acercarse l</a></li>
 						    <li><a href="#" style="font-size:8px;"><i class="icon-screenshot"></i> Atacar</a></li>
 						    <li><a href="#" style="font-size:8px;"><i class="icon-fullscreen"></i> Minear</a></li>
 						    <li class="divider"></li>
@@ -142,8 +145,8 @@
 		 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
 		 </div>
 
-	<script>
-		$(function() {
+<script>
+$(function() {
 			$("button#verSalirUniverso").click(function(){
 				var pagina = 'http://cantely.com/demo/lab3dviewver/';
 				document.location.href=pagina;
@@ -180,9 +183,15 @@
 			$("button#cerrarMenuInferior").click(function(){
 				$("div#menuInferior").hide();
 			});
+			
+			$("div#pilotoAutomatico").hide();
+			$("a.acercarse").click(function(){
+  				var id = $( this ).attr("id");
+  				acercarse(id);
+  				$("div#pilotoAutomatico").show("fold");
+			});
 
-		});
-
+});
 
         if (!Detector.webgl) {
             Detector.addGetWebGLMessage();
@@ -195,14 +204,15 @@
 		init();
 		animate();	
 
-
 		function init() {
-				container = document.createElement('div');
-				document.body.appendChild( container );
 
 				this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1e7 );
-
-
+				cameraControls = new THREE.OrbitControls(camera);
+				cameraControls.target.set( 0, 0, 0);
+				cameraControls.maxDistance = 400;
+				cameraControls.minDistance = 50;
+				//cameraControls.update();
+				camera.position.set(80,20,0);
 				this.scene = new THREE.Scene();
 				scene.fog = new THREE.FogExp2( 0x000000, 0.00000011 );
 
@@ -218,14 +228,10 @@
 		        renderer.sortObjects = true;
 		        renderer.autoClear = true;
 		        renderer.setClearColor(new THREE.Color(0x000000));
+		        container = document.createElement('div');
+				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
 				
-				cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
-				cameraControls.target.set( 0, 0, 0);
-				cameraControls.maxDistance = 400;
-				cameraControls.minDistance = 50;
-				cameraControls.update();
-
 				planet();
 				moon();
 				tubo();
@@ -246,14 +252,16 @@
 
 		function animate() {
 				requestAnimationFrame( animate );
-				cameraControls.update();
+				
 				render();
 				stats.update();
 				stats2.update();
-				renderParticulas();
+				//renderParticulas();
 		}
 
-		function render() {         			
+		function render() {   
+
+				     			
 				var delta = clock.getDelta();
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
@@ -290,7 +298,6 @@
 
 				if(velocidadReal <= -50){
 					controlsnave.moveState.right = 0.50;
-								
 				};
 
 				if(controlsnave.movementSpeedMultiplier == 1){ 
@@ -299,11 +306,20 @@
 				/*$("#botonoculus").click(function(){
 					effect.render( scene, camera );
 				});*/
-
-				controlsnave.update( delta );
+				cameraControls.update( delta ); 
+				controlsnave.update(  delta );
 				composer.render( delta );
+				
+				this.acercarse = function(id){
+					console.log(id);
+					$("div#pilotoAutomatico").show("fold");
+					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
+					//reducir la velocidad a 0
+					//girar la nave hasta el punto fijado (puede valer 0,0,0 que es la tierra como prueba)
+					//acelerar hasta estar a 10K km. del objetivo
+				}
 		}
 
-		</script>
+</script>
 </body>
 </html>
