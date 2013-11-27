@@ -30,6 +30,7 @@
 		<script src="js/three.min.js"></script>
 		
 		<script src="js/controls/FlyControls.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
 
 		<script src="js/shaders/CopyShader.js"></script>
 		<script src="js/shaders/FilmShader.js"></script>
@@ -201,6 +202,7 @@
 
 				this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1e7 );
 
+
 				this.scene = new THREE.Scene();
 				scene.fog = new THREE.FogExp2( 0x000000, 0.00000011 );
 
@@ -218,6 +220,12 @@
 		        renderer.setClearColor(new THREE.Color(0x000000));
 		        container.appendChild( renderer.domElement );
 				
+				cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
+				cameraControls.target.set( 0, 0, 0);
+				cameraControls.maxDistance = 400;
+				cameraControls.minDistance = 50;
+				cameraControls.update();
+
 				planet();
 				moon();
 				tubo();
@@ -238,10 +246,11 @@
 
 		function animate() {
 				requestAnimationFrame( animate );
+				cameraControls.update();
 				render();
-				//renderParticulas();
 				stats.update();
 				stats2.update();
+				renderParticulas();
 		}
 
 		function render() {         			
@@ -249,20 +258,21 @@
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
 
-				particles.rotation.z += 0.009;
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
-
 				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
-
 				$("#velocidadReal").html(velocidadReal);
+				particles.scale.x = velocidadReal/900000;
+				particles.scale.z = velocidadReal/90000000;
+				particles.position.x = 15+velocidadReal/90000;
+				particles.rotation.x = 0.9+velocidadReal/1000;
+				//particles.rotation.x += 0.9;
 
 				var posicionXnave = Math.abs(nave.position.x);
 				var posicionYnave = Math.abs(nave.position.y);
 				var posicionZnave = Math.abs(nave.position.z);
 				var radioTierra = 6370/2;
 				var distanciaPlaneta = Math.sqrt(posicionZnave+posicionYnave+posicionXnave-radioTierra);
-
 				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta)+"K.");
 
 				var radioMoon = 1737/2;
@@ -270,18 +280,17 @@
 				var elevarYmoon = Math.pow(meshMoon.position.y-nave.position.y,2);
 				var elevarZmoon = Math.pow(meshMoon.position.z-nave.position.z,2);
 				var resultadoDistanciaMoon = Math.sqrt(elevarXmoon+elevarYmoon+elevarZmoon-radioMoon);
-
 				$("#distanciaMoon").html(parseInt(resultadoDistanciaMoon/1000)+"K.");
-
 				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
+
 
 				if(velocidadReal >= 250){
 					controlsnave.moveState.left = 2.50;
-					particles.rotation.z += 0.03;
 				};
+
 				if(velocidadReal <= -50){
 					controlsnave.moveState.right = 0.50;
-					particles.rotation.z -= 0.03;
+								
 				};
 
 				if(controlsnave.movementSpeedMultiplier == 1){ 
@@ -290,8 +299,7 @@
 				/*$("#botonoculus").click(function(){
 					effect.render( scene, camera );
 				});*/
-				
-				//controlsnave.movementSpeed = 1.33 * d;
+
 				controlsnave.update( delta );
 				composer.render( delta );
 		}
