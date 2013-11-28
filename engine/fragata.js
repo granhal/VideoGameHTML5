@@ -16,7 +16,7 @@
 						}
 					} );
 					
-					spacialship.position.set(0,0,0);
+					spacialship.position.set(0,0,-10000);
 					//spacialship.rotation.set(0,0,0);
 					spacialship.scale.set(0.1,0.1,0.1);
 					scene.add(spacialship);

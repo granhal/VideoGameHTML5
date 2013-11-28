@@ -201,11 +201,9 @@ $(function() {
 		var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
 		this.clock = new THREE.Clock();
 		var	counter = 0;
-		var tangent = new THREE.Vector3();
-		var axis = new THREE.Vector3();
-		var up = new THREE.Vector3(0, 1, 0);
-		var numPoints;
 
+		var numPoints;
+		var delta = clock.getDelta();
 		init();
 		animate();	
 
@@ -243,47 +241,7 @@ $(function() {
 				
 		        			
 				
-		        this.acercarse = function(id){
-					console.log(id);
-					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
-					$("div#pilotoAutomatico").show("fold");
-					//reducir la velocidad a 0
 
-					//seleccionar punto a seguir el piloto automatico
-					if(id === "1"){ 
-						idx = -10000;
-						idy = 0;
-						idz = 10000;
-					};
-					if(id === "2"){ 
-						idx = -384400/3;
-						ixy = 0;
-						idz = 0;
-					};
-					console.log(idx+","+idy+","+idz);
-					var numPoints = 50;
-					this.spline = new THREE.SplineCurve3([
-				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
-				   		new THREE.Vector3( idx,idy,idz ),
-					]);
-				
-					var material = new THREE.LineBasicMaterial({
-						color: 0xff00f0,
-					});
-					
-					var geometry = new THREE.Geometry();
-					var splinePoints = spline.getPoints( numPoints );
-					
-					for( var i = 0; i < splinePoints.length; i++ ){
-						geometry.vertices.push( splinePoints[i] );  
-					}
-					
-					var line = new THREE.Line( geometry, material );
-					scene.add( line );
-
-					//acelerar hasta estar a 10K km. del objetivo por la linea trazada
-				
-				};
 				
 
 				planet();
@@ -313,7 +271,8 @@ $(function() {
 			        var radians = Math.acos(up.dot(tangent));
 			        nave.quaternion.setFromAxisAngle(axis, radians);
 
-			        counter += 0.005
+			        counter += delta;
+			        nave.lookAt(planet.meshPlanet);
 			    } else {
 			        counter = 0;
 			    }
@@ -321,7 +280,7 @@ $(function() {
 
 		function animate() {
 				requestAnimationFrame( animate );
-				
+
 				render();
 				stats.update();
 				stats2.update();
@@ -330,16 +289,75 @@ $(function() {
 
 
 		function render() {   
+		        this.acercarse = function(id){
+					console.log(id);
+					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
+					$("div#pilotoAutomatico").show("fold");
+					//reducir la velocidad a 0
 
+					//seleccionar punto a seguir el piloto automatico
+					if(id == "1"){ 
+						idx = -10000/3;
+						idy = 0;
+						idz = 10000;
+					};
+					if(id == "2"){ 
+						idx = -384400/3.1;
+						ixy = 0;
+						idz = 0;
+					};
+					console.log(idx+","+idy+","+idz);
+
+
+					var numPoints = 10000;
+					this.spline = new THREE.SplineCurve3([
+				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
+				   		new THREE.Vector3( idx,idy,idz ),
+					]);
 				
+					var material = new THREE.LineBasicMaterial({
+						color: 0xff00f0,
+					});
+					
+					var geometry = new THREE.Geometry();
+					var splinePoints = spline.getPoints( numPoints );
+					
+					for( var i = 0; i < splinePoints.length; i++ ){
+						geometry.vertices.push( splinePoints[i] );  
+					}
+					
+					var line = new THREE.Line( geometry, material );
+					scene.add( line );
 
-				this.delta = clock.getDelta();
+
+					//acelerar hasta estar a 10K km. del objetivo por la linea trazada 
+					var tangent = new THREE.Vector3();
+					var axis = new THREE.Vector3();
+					var up = new THREE.Vector3(0, 0, 0);
+
+					for( var i = 0; i < numPoints; i++ ){
+						pt = spline.getPoint( i );
+						nave.position.set( pt.x, pt.y, pt.z );
+						tangent = spline.getTangentAt(i).normalize();
+				        axis.crossVectors(up, tangent).normalize();
+				        var radians = Math.acos(up.dot(tangent));
+				        nave.quaternion.setFromAxisAngle(axis, radians);
+						
+					}
+
+					
+				};
+				
+				//nave.position.x -= 100;
+				//camera.position.x -= 100;
+				var delta = clock.getDelta();
+
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
 				
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
-				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
+				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
 				$("#velocidadReal").html(velocidadReal);
 				particles.scale.x = velocidadReal/900000;
 				particles.scale.z = velocidadReal/90000000;
