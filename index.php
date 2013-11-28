@@ -71,7 +71,7 @@
 			<span style="color:#0CF">Q</span>: Bajar<br>
 			<span style="color:#0CF">E</span>: Subir<br> 
 			<span style="color:#0CF">Shift</span>: Turbo <br>
-			<span style="color:#0CF">Arrastrar ratón</span>: Girar <br>
+			<span style="color:#0CF">Ratón</span>: OrbitCamera <br>
 		</div>
 		<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px; line-height:10px;">
 				<p>Velocidad: <span id="velocidadReal"></span> m/s</p>
@@ -200,19 +200,28 @@ $(function() {
 
 		var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
 		this.clock = new THREE.Clock();
-			
+		var	counter = 0;
+		var tangent = new THREE.Vector3();
+		var axis = new THREE.Vector3();
+		var up = new THREE.Vector3(0, 1, 0);
+		var numPoints;
+
 		init();
 		animate();	
 
 		function init() {
 
 				this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1e7 );
+				camera.position.set(80,0,0);
+				camera.useQuaternion = true;
+				
+
+
 				cameraControls = new THREE.OrbitControls(camera);
-				cameraControls.target.set( 0, 0, 0);
+				//cameraControls.target.set(-10000,0,10000);
 				cameraControls.maxDistance = 400;
 				cameraControls.minDistance = 50;
-				//cameraControls.update();
-				camera.position.set(80,20,0);
+				
 				this.scene = new THREE.Scene();
 				scene.fog = new THREE.FogExp2( 0x000000, 0.00000011 );
 
@@ -232,6 +241,51 @@ $(function() {
 				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
 				
+		        			
+				
+		        this.acercarse = function(id){
+					console.log(id);
+					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
+					$("div#pilotoAutomatico").show("fold");
+					//reducir la velocidad a 0
+
+					//seleccionar punto a seguir el piloto automatico
+					if(id === "1"){ 
+						idx = -10000;
+						idy = 0;
+						idz = 10000;
+					};
+					if(id === "2"){ 
+						idx = -384400/3;
+						ixy = 0;
+						idz = 0;
+					};
+					console.log(idx+","+idy+","+idz);
+					var numPoints = 50;
+					this.spline = new THREE.SplineCurve3([
+				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
+				   		new THREE.Vector3( idx,idy,idz ),
+					]);
+				
+					var material = new THREE.LineBasicMaterial({
+						color: 0xff00f0,
+					});
+					
+					var geometry = new THREE.Geometry();
+					var splinePoints = spline.getPoints( numPoints );
+					
+					for( var i = 0; i < splinePoints.length; i++ ){
+						geometry.vertices.push( splinePoints[i] );  
+					}
+					
+					var line = new THREE.Line( geometry, material );
+					scene.add( line );
+
+					//acelerar hasta estar a 10K km. del objetivo por la linea trazada
+				
+				};
+				
+
 				planet();
 				moon();
 				tubo();
@@ -242,6 +296,7 @@ $(function() {
 				fragata();
 				motor();
 
+				//setInterval( moveBox, 100 );
 				/*$("#botonoculus").click(function(){
 					  effect = new THREE.OculusRiftEffect( renderer, {worldScale: 10000} );
 					  effect.setSize( window.innerWidth, window.innerHeight );
@@ -249,6 +304,20 @@ $(function() {
 				
 				window.addEventListener( 'resize', onWindowResize, false );
 		}   
+					
+		function moveBox() {
+			    if (counter <= 1) {
+			        nave.position = spline.getPointAt(counter);
+			        tangent = spline.getTangentAt(counter).normalize();
+			        axis.cross(up, tangent).normalize();
+			        var radians = Math.acos(up.dot(tangent));
+			        nave.quaternion.setFromAxisAngle(axis, radians);
+
+			        counter += 0.005
+			    } else {
+			        counter = 0;
+			    }
+		}
 
 		function animate() {
 				requestAnimationFrame( animate );
@@ -259,13 +328,15 @@ $(function() {
 				//renderParticulas();
 		}
 
+
 		function render() {   
 
-				     			
-				var delta = clock.getDelta();
+				
+
+				this.delta = clock.getDelta();
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
-
+				
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
 				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
@@ -276,11 +347,11 @@ $(function() {
 				particles.rotation.x = 0.9+velocidadReal/1000;
 				//particles.rotation.x += 0.9;
 
-				var posicionXnave = Math.abs(nave.position.x);
-				var posicionYnave = Math.abs(nave.position.y);
-				var posicionZnave = Math.abs(nave.position.z);
 				var radioTierra = 6370/2;
-				var distanciaPlaneta = Math.sqrt(posicionZnave+posicionYnave+posicionXnave-radioTierra);
+				this.posicionXnave = Math.abs(nave.position.x);
+				this.posicionYnave = Math.abs(nave.position.y);
+				this.posicionZnave = Math.abs(nave.position.z);
+				var distanciaPlaneta = Math.sqrt(posicionXnave+posicionYnave+posicionZnave-radioTierra);
 				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta)+"K.");
 
 				var radioMoon = 1737/2;
@@ -309,15 +380,8 @@ $(function() {
 				cameraControls.update( delta ); 
 				controlsnave.update(  delta );
 				composer.render( delta );
-				
-				this.acercarse = function(id){
-					console.log(id);
-					$("div#pilotoAutomatico").show("fold");
-					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
-					//reducir la velocidad a 0
-					//girar la nave hasta el punto fijado (puede valer 0,0,0 que es la tierra como prueba)
-					//acelerar hasta estar a 10K km. del objetivo
-				}
+
+
 		}
 
 </script>

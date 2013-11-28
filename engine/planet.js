@@ -39,11 +39,13 @@
 				geometry.computeTangents();
 
 				this.meshPlanet = new THREE.Mesh( geometry, materialNormalMap );
+				meshPlanet.position.set(-10000,0,10000);
 				meshPlanet.rotation.y = 0;
 				meshPlanet.rotation.z = 0.41;
 				scene.add( meshPlanet );
 
 				meshClouds = new THREE.Mesh( geometry, materialClouds );
+				meshClouds.position.set(-10000,0,10000);
 				meshClouds.scale.set( 1.1, 1.1, 1.1 );
 				meshClouds.rotation.z = 0.41;
 				scene.add( meshClouds );

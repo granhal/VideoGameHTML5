@@ -16,7 +16,7 @@
 						}
 					} );
 					
-					spacialship.position.set(20000,0,0);
+					spacialship.position.set(0,0,0);
 					//spacialship.rotation.set(0,0,0);
 					spacialship.scale.set(0.1,0.1,0.1);
 					scene.add(spacialship);
@@ -49,8 +49,8 @@
 			var particles, geometry, materials = [], i, h, color, sprite, size;
 
 				geometry = new THREE.Geometry();
-				sprite1 = THREE.ImageUtils.loadTexture( "textures/sprites/fire.png" );
-				sprite2 = THREE.ImageUtils.loadTexture( "textures/sprites/fire2.png" );
+				sprite1 = THREE.ImageUtils.loadTexture( "textures/sprites/snowflake1.png" );
+				sprite2 = THREE.ImageUtils.loadTexture( "textures/sprites/snowflake2.png" );
 
 				for ( i = 0; i < 15; i ++ ) {
 					var vertex = new THREE.Vector3();
@@ -61,8 +61,8 @@
 				}
 
 				// color, sprite, tamaño
-				parameters = [ [ [1.0, 0.2, 0.5], sprite2, 5],
-							   [ [0.90, 0.05, 0.5], sprite1, 8 ]
+				parameters = [ [ [1.0, 0.2, 0.5], sprite2, 4],
+							   [ [0.90, 0.05, 0.5], sprite1, 7 ]
 							   ];
 
 				for ( i = 0; i < parameters.length; i ++ ) {

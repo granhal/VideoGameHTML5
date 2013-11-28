@@ -26,7 +26,7 @@
 
 				}
 
-				var stars;
+				this.stars;
 				var starsMaterials = [
 					new THREE.ParticleSystemMaterial( { color: 0x97c5ca, size: 0.9, sizeAttenuation: true } ),
 					new THREE.ParticleSystemMaterial( { color: 0x8474b4, size: 1, sizeAttenuation: true } ),
