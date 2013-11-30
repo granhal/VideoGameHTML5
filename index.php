@@ -48,6 +48,7 @@
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
+		<script src="js/libs/tween.min.js"></script>
 
 		<script src="engine/onwindowsresize.js"></script>
 		<script src="engine/fragata.js"></script>
@@ -213,8 +214,6 @@ $(function() {
 				camera.position.set(80,0,0);
 				camera.useQuaternion = true;
 				
-
-
 				cameraControls = new THREE.OrbitControls(camera);
 				//cameraControls.target.set(-10000,0,10000);
 				cameraControls.maxDistance = 400;
@@ -239,56 +238,6 @@ $(function() {
 				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
 				
-		        			
-				
-
-				
-
-				planet();
-				moon();
-				tubo();
-				tuboOBJ();
-				starts();
-				statsinwindows();
-				prostprocessing();
-				fragata();
-				motor();
-
-				//setInterval( moveBox, 100 );
-				/*$("#botonoculus").click(function(){
-					  effect = new THREE.OculusRiftEffect( renderer, {worldScale: 10000} );
-					  effect.setSize( window.innerWidth, window.innerHeight );
-				});*/
-				
-				window.addEventListener( 'resize', onWindowResize, false );
-		}   
-					
-		function moveBox() {
-			    if (counter <= 1) {
-			        nave.position = spline.getPointAt(counter);
-			        tangent = spline.getTangentAt(counter).normalize();
-			        axis.cross(up, tangent).normalize();
-			        var radians = Math.acos(up.dot(tangent));
-			        nave.quaternion.setFromAxisAngle(axis, radians);
-
-			        counter += delta;
-			        nave.lookAt(planet.meshPlanet);
-			    } else {
-			        counter = 0;
-			    }
-		}
-
-		function animate() {
-				requestAnimationFrame( animate );
-
-				render();
-				stats.update();
-				stats2.update();
-				//renderParticulas();
-		}
-
-
-		function render() {   
 		        this.acercarse = function(id){
 					console.log(id);
 					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
@@ -309,7 +258,7 @@ $(function() {
 					console.log(idx+","+idy+","+idz);
 
 
-					var numPoints = 10000;
+					var numPoints = 2;
 					this.spline = new THREE.SplineCurve3([
 				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
 				   		new THREE.Vector3( idx,idy,idz ),
@@ -328,25 +277,42 @@ $(function() {
 					
 					var line = new THREE.Line( geometry, material );
 					scene.add( line );
-
-
-					//acelerar hasta estar a 10K km. del objetivo por la linea trazada 
-					var tangent = new THREE.Vector3();
-					var axis = new THREE.Vector3();
-					var up = new THREE.Vector3(0, 0, 0);
-
-					for( var i = 0; i < numPoints; i++ ){
-						pt = spline.getPoint( i );
-						nave.position.set( pt.x, pt.y, pt.z );
-						tangent = spline.getTangentAt(i).normalize();
-				        axis.crossVectors(up, tangent).normalize();
-				        var radians = Math.acos(up.dot(tangent));
-				        nave.quaternion.setFromAxisAngle(axis, radians);
-						
-					}
-
 					
+					//acelerar hasta estar a 10K km. del objetivo por la linea trazada 
+					new TWEEN.Tween( nave.position )
+						.to( { x: idx, y: idy, z: idz }, 15000 )
+						//TWEEN.Easing.Elastic.InOut
+						.easing( TWEEN.Easing.Exponential.Out )
+						.start();
 				};
+				
+
+				planet();
+				moon();
+				tubo();
+				tuboOBJ();
+				starts();
+				statsinwindows();
+				prostprocessing();
+				fragata();
+				motor();
+				
+				window.addEventListener( 'resize', onWindowResize, false );
+		}   
+					
+
+		function animate() {
+				requestAnimationFrame( animate );
+
+				render();
+				stats.update();
+				stats2.update();
+				//renderParticulas();
+		}
+
+
+		function render() {   
+
 				
 				//nave.position.x -= 100;
 				//camera.position.x -= 100;
@@ -395,9 +361,12 @@ $(function() {
 				/*$("#botonoculus").click(function(){
 					effect.render( scene, camera );
 				});*/
+
+				TWEEN.update( );
 				cameraControls.update( delta ); 
 				controlsnave.update(  delta );
 				composer.render( delta );
+
 
 
 		}
