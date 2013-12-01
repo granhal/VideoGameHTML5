@@ -265,7 +265,18 @@ $(function() {
 				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
 				
-		        this.acercarse = function(id){
+
+				planet();
+				moon();
+				tubo();
+				tuboOBJ();
+				starts();
+				statsinwindows();
+				prostprocessing();
+				fragata();
+				motor();
+
+			this.acercarse = function(id){
 					console.log(id);
 
 					if(id == "1"){ 
@@ -320,9 +331,9 @@ $(function() {
 						$( "div#sincombustible" ).show();
 						$("div#sincombustibleayuda").show("fold");
 					}
-				}
+			}
 
-				var gastarcombustible = function(){
+			var gastarcombustible = function(){
 					var maxcombustible = 99;
 					var mincombusitlbe = 0;
 
@@ -330,7 +341,7 @@ $(function() {
 							combustible -= velocidadReal/50;
 					}else{
 						if(combustible <= maxcombustible){
-							combustible += 0.9;
+							combustible += 1.9;
 						}
 					}
 					if(combustible <= 0){
@@ -341,19 +352,9 @@ $(function() {
 					}else{
 						$( "div#sincombustible" ).hide();
 					}
-				}
-				setInterval(gastarcombustible,1000)
+			}
+				setInterval(gastarcombustible,1000);
 
-				planet();
-				moon();
-				tubo();
-				tuboOBJ();
-				starts();
-				statsinwindows();
-				prostprocessing();
-				fragata();
-				motor();
-				
 				window.addEventListener( 'resize', onWindowResize, false );
 		}   
 					
@@ -379,8 +380,6 @@ $(function() {
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
 				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
-
-
 
 				$("div.bar#barravelocidad").css("width", velocidadReal);
 				$("div.bar#barracombustible").css("width", Math.round( combustible* 10 ) / 10);
@@ -416,7 +415,18 @@ $(function() {
 				
 				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
 
+                                if(velocidadReal >= 250){
+                                    controlsnave.moveState.left = 2.50;
+                                };
 
+                                if(velocidadReal <= -10){
+                                	controlsnave.moveState.left = 0;
+                                    controlsnave.moveState.right = 0.10;
+                                };
+
+                                if(controlsnave.movementSpeedMultiplier == 1){ 
+                                    controlsnave.moveState.left = 5; 
+                                };
 
 
 				/*$("#botonoculus").click(function(){

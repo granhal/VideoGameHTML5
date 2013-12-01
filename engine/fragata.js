@@ -17,7 +17,7 @@
 					} );
 					
 					spacialship.position.set(-10,-100,-100);
-					//spacialship.rotation.set(0,0,0);
+					spacialship.rotation.set(0,0,0);
 					spacialship.scale.set(0.1,0.1,0.1);
 					scene.add(spacialship);
 					
@@ -25,8 +25,6 @@
 					controlsnave.rollSpeed = 0.08;
 					controlsnave.autoForward = false;
 					controlsnave.dragToLook = true;
-
-					//camera.rotation.set(0,1.6,0);
 
 					spacialship.add(camera);
 					spacialship.add(particles);
