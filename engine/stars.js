@@ -26,7 +26,6 @@
 
 				}
 
-				this.stars;
 				var starsMaterials = [
 					new THREE.ParticleSystemMaterial( { color: 0x97c5ca, size: 0.9, sizeAttenuation: true } ),
 					new THREE.ParticleSystemMaterial( { color: 0x8474b4, size: 1, sizeAttenuation: true } ),
@@ -38,7 +37,7 @@
 
 				for ( i = 10; i < 40; i ++ ) {
 
-					stars = new THREE.ParticleSystem( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
+					this.stars = new THREE.ParticleSystem( starsGeometry[ i % 2 ], starsMaterials[ i % 6 ] );
 
 					stars.rotation.x = Math.random() * 15;
 					stars.rotation.y = Math.random() * 10;

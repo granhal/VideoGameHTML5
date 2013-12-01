@@ -20,6 +20,7 @@
 <!-- css -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="css/ui.css" rel="stylesheet" media="screen">
+
 <!-- fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
 <!-- js -->
@@ -74,27 +75,52 @@
 			<span style="color:#0CF">Shift</span>: Turbo <br>
 			<span style="color:#0CF">Ratón</span>: OrbitCamera <br>
 		</div>
-		<div id="velocidad" style="margin: 450px; position:fixed; font-size:9px; line-height:10px;">
-				<p>Velocidad: <span id="velocidadReal"></span> m/s</p>
-				<p>Posición: <span id="posicion"></span></p>
+		<div id="pilotoAutomatico" style="color:#42ff00">
+			<center>Piloto automático activado</center>
 		</div>
+		<div id="sincombustible" class="sincombustible" style="color:red">
+			<center>Sin combustible</center>
+		</div>
+		<div class="alert alert-error" id="sincombustibleayuda" style="width:18%; z-index:100; position:fixed; top:58%; left:65%;">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  	<h4>Sin combustible</h4>
+			Para usar el piloto automático debes tener mínimo 50% de combustible
+		</div>
+		<div id="velocidad" style="margin: 300px; position:fixed; font-size:10px; line-height:9px; width:160px;">
+			<p>Velocidad: <span id="velocidadReal"></span> m/s</p>
+			<div class="progress progress-striped active" style="width:150px;">
+				<div class="bar" id="barravelocidad" style="width: 100%"></div>
+			</div>
+			<p>Combustible: <span id="combustibleReal"></span>%</p>
+			<div class="progress progress-danger progress-striped active" style="width:100px;">
+				<div class="bar" id="barracombustible" style="width: 100%"></div>
+			</div>
+			<p>Escudos: 100%</p>
+			<div class="progress progress-warning progress-striped active" style="width:100px;">
+				<div class="bar" id="barraescudos" style="width: 100%"></div>
+			</div>
+			<p>Blindaje: 100%</p>
+			<div class="progress progress-success progress-striped active" style="width:100px;">
+				<div class="bar" id="barrablindaje" style="width: 100%"></div>
+			</div>			
+			<p>Posición: <span id="posicion"></span></p>
+		</div>
+
 		<div id="creditos">
 			<button class="close" id="cerrarCreditos" >&times;</button>
 			<span style="font-size:14px">Créditos</span><br>
 			<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
-				v.0.0.107 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
+				v.0.0.207 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
 				<p class="text-center">
 					<a href="http://www.cantelymedia.com" target="_blank"><img src="cantelymedia.jpg" width="30%"></a>&nbsp;&nbsp;&nbsp;
 					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
 				</p>
 		</div>
-		<div id="pilotoAutomatico">
-		Piloto automático activado
-		</div>
+
 		<div id="radar" >
 			<button class="close" id="cerrarRadar">&times;</button>
 			<span style="font-size:14px">Radar</span>
-			<table class="table table-condensed" style="font-size:8px;">
+			<table class="table table-condensed" style="font-size:10px;">
 			  	<tr>
   				    <td>Target</td>
     				<td>Distancia</td>
@@ -109,11 +135,11 @@
 						<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
 						  <ul class="dropdown-menu">
-						    <li><a href="#" style="font-size:8px;" id="1" alt="1" class="acercarse"><i class="icon-map-marker"></i> Acercarse t</a></li>
-						    <li><a href="#" style="font-size:8px;" id="atacar"><i class="icon-screenshot"></i> Atacar</a></li>
-						    <li><a href="#" style="font-size:8px;" id="minear"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:10px;" id="atacar"><i class="icon-screenshot"></i> Atacar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="minear"><i class="icon-fullscreen"></i> Minear</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-info-sign"></i> Info</a></li>
+						    <li><a href="#" style="font-size:10px;"><i class="icon-info-sign"></i> Info</a></li>
 						  </ul>
 						</div>
 					</td>
@@ -126,11 +152,11 @@
     					<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
 						  <ul class="dropdown-menu">
-						    <li><a href="#" style="font-size:8px;" id="2" alt="2" class="acercarse"><i class="icon-map-marker"></i> Acercarse l</a></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-screenshot"></i> Atacar</a></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:10px;"><i class="icon-screenshot"></i> Atacar</a></li>
+						    <li><a href="#" style="font-size:10px;"><i class="icon-fullscreen"></i> Minear</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#" style="font-size:8px;"><i class="icon-info-sign"></i> Info</a></li>
+						    <li><a href="#" style="font-size:10px;"><i class="icon-info-sign"></i> Info</a></li>
 						  </ul>
 						</div>
     				</td>
@@ -140,14 +166,16 @@
 		<div id="container"></div>
 		<div id="menuInferior"> 
 			<button class="close" id="cerrarMenuInferior">&times;</button>
-			<button class="btn btn-inverse" id="verRadar"> ver radar</button>
-			<button class="btn btn-inverse" id="verControles"> ver controles</button>
-		 	<button class="btn btn-inverse" id="verCreditos"> ver créditos</button>
-		 	<button class="btn btn-inverse" id="verSalirUniverso">Ir al hangar</button>
+			<button class="btn btn-inverse" id="verRadar"> Radar </button>
+			<button class="btn btn-inverse" id="verControles"> Controles </button>
+		 	<button class="btn btn-inverse" id="verCreditos"> Créditos </button>
+		 	<button class="btn btn-inverse" id="verSalirUniverso"> Hangar</button>
 		 </div>
 
 <script>
 $(function() {
+
+
 			$("button#verSalirUniverso").click(function(){
 				var pagina = 'http://cantely.com/demo/lab3dviewver/';
 				document.location.href=pagina;
@@ -189,8 +217,9 @@ $(function() {
 			$("a.acercarse").click(function(){
   				var id = $( this ).attr("id");
   				acercarse(id);
-  				$("div#pilotoAutomatico").show("fold");
 			});
+
+ 			$("div#sincombustibleayuda").hide().draggable();
 
 });
 
@@ -201,8 +230,7 @@ $(function() {
 
 		var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
 		this.clock = new THREE.Clock();
-		var	counter = 0;
-
+		var combustible = 100;
 		var numPoints;
 		var delta = clock.getDelta();
 		init();
@@ -215,12 +243,11 @@ $(function() {
 				camera.useQuaternion = true;
 				
 				cameraControls = new THREE.OrbitControls(camera);
-				//cameraControls.target.set(-10000,0,10000);
 				cameraControls.maxDistance = 400;
 				cameraControls.minDistance = 50;
 				
 				this.scene = new THREE.Scene();
-				scene.fog = new THREE.FogExp2( 0x000000, 0.00000011 );
+				scene.fog = new THREE.FogExp2( 0x000000, 0.0000003 );
 
 				dirLight = new THREE.DirectionalLight( 0xc2c2c2 );
 				dirLight.position.set( 2000, 1000, 1 ).normalize();
@@ -240,11 +267,7 @@ $(function() {
 				
 		        this.acercarse = function(id){
 					console.log(id);
-					//Mostrar cartel piloto automatico activado (si se toca cualquier tecla se desactiva)
-					$("div#pilotoAutomatico").show("fold");
-					//reducir la velocidad a 0
 
-					//seleccionar punto a seguir el piloto automatico
 					if(id == "1"){ 
 						idx = -10000/3;
 						idy = 0;
@@ -257,8 +280,7 @@ $(function() {
 					};
 					console.log(idx+","+idy+","+idz);
 
-
-					var numPoints = 2;
+					/*var numPoints = 2;
 					this.spline = new THREE.SplineCurve3([
 				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
 				   		new THREE.Vector3( idx,idy,idz ),
@@ -276,16 +298,51 @@ $(function() {
 					}
 					
 					var line = new THREE.Line( geometry, material );
-					scene.add( line );
-					
-					//acelerar hasta estar a 10K km. del objetivo por la linea trazada 
-					new TWEEN.Tween( nave.position )
+					scene.add( line );*/
+					if(combustible >= 50){
+					var pilotoautomatico = new TWEEN.Tween( nave.position )
 						.to( { x: idx, y: idy, z: idz }, 15000 )
 						//TWEEN.Easing.Elastic.InOut
 						.easing( TWEEN.Easing.Exponential.Out )
-						.start();
-				};
-				
+						.onUpdate( function () {
+	           				$( "div#pilotoAutomatico" ).show("fade", function() {
+	      						$( this ).hide("fade");
+							});
+							combustible -= 0.03;
+							velocidadReal = 150;
+							$("#velocidadReal").html(velocidadReal);
+							$("div.bar#barravelocidad").css("width", velocidadReal);
+							$( "div#sincombustible" ).hide();
+           				})
+						.start();						
+					}else{
+						console.log("sin combustible");
+						$( "div#sincombustible" ).show();
+						$("div#sincombustibleayuda").show("fold");
+					}
+				}
+
+				var gastarcombustible = function(){
+					var maxcombustible = 99;
+					var mincombusitlbe = 0;
+
+					if(velocidadReal > 10){
+							combustible -= velocidadReal/50;
+					}else{
+						if(combustible <= maxcombustible){
+							combustible += 0.9;
+						}
+					}
+					if(combustible <= 0){
+						combustible = mincombusitlbe;
+						controlsnave.moveState.right = 0;
+						controlsnave.moveState.left = 0;
+						$( "div#sincombustible" ).show();
+					}else{
+						$( "div#sincombustible" ).hide();
+					}
+				}
+				setInterval(gastarcombustible,1000)
 
 				planet();
 				moon();
@@ -302,8 +359,8 @@ $(function() {
 					
 
 		function animate() {
-				requestAnimationFrame( animate );
 
+				requestAnimationFrame( animate );
 				render();
 				stats.update();
 				stats2.update();
@@ -313,30 +370,42 @@ $(function() {
 
 		function render() {   
 
-				
-				//nave.position.x -= 100;
-				//camera.position.x -= 100;
 				var delta = clock.getDelta();
 
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
-				
+				stars.rotation.y += 15 * delta;
+
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
 				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
+
+
+
+				$("div.bar#barravelocidad").css("width", velocidadReal);
+				$("div.bar#barracombustible").css("width", Math.round( combustible* 10 ) / 10);
+
+				$("#combustibleReal").html(Math.round( combustible* 10 ) / 10);
+
+				$("div.bar#barrablindaje").css("width", 100);
+				$("div.bar#barraescudos").css("width", 100);
+
 				$("#velocidadReal").html(velocidadReal);
 				particles.scale.x = velocidadReal/900000;
 				particles.scale.z = velocidadReal/90000000;
 				particles.position.x = 15+velocidadReal/90000;
 				particles.rotation.x = 0.9+velocidadReal/1000;
-				//particles.rotation.x += 0.9;
-
-				var radioTierra = 6370/2;
+				
 				this.posicionXnave = Math.abs(nave.position.x);
 				this.posicionYnave = Math.abs(nave.position.y);
 				this.posicionZnave = Math.abs(nave.position.z);
-				var distanciaPlaneta = Math.sqrt(posicionXnave+posicionYnave+posicionZnave-radioTierra);
-				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta)+"K.");
+
+				var radioTierra = 6370/2;
+				var elevarXplanet = Math.pow(meshPlanet.position.x-nave.position.x,2);
+				var elevarYplanet = Math.pow(meshPlanet.position.y-nave.position.y,2);
+				var elevarZplanet = Math.pow(meshPlanet.position.z-nave.position.z,2);
+				var distanciaPlaneta = Math.sqrt(elevarXplanet+elevarYplanet+elevarZplanet-radioTierra);
+				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta/1000)+"K.");
 
 				var radioMoon = 1737/2;
 				var elevarXmoon = Math.pow(meshMoon.position.x-nave.position.x,2);
@@ -344,20 +413,12 @@ $(function() {
 				var elevarZmoon = Math.pow(meshMoon.position.z-nave.position.z,2);
 				var resultadoDistanciaMoon = Math.sqrt(elevarXmoon+elevarYmoon+elevarZmoon-radioMoon);
 				$("#distanciaMoon").html(parseInt(resultadoDistanciaMoon/1000)+"K.");
+				
 				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
 
 
-				if(velocidadReal >= 250){
-					controlsnave.moveState.left = 2.50;
-				};
 
-				if(velocidadReal <= -50){
-					controlsnave.moveState.right = 0.50;
-				};
 
-				if(controlsnave.movementSpeedMultiplier == 1){ 
-					controlsnave.moveState.left = 5; 
-				}
 				/*$("#botonoculus").click(function(){
 					effect.render( scene, camera );
 				});*/
@@ -366,8 +427,6 @@ $(function() {
 				cameraControls.update( delta ); 
 				controlsnave.update(  delta );
 				composer.render( delta );
-
-
 
 		}
 
