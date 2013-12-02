@@ -285,7 +285,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 		if ( scope.enabled === false ) { return; }
 		event.preventDefault();
 
-		if ( event.button === 0 ) {
+		if ( event.button === 2 ) {
 			if ( scope.noRotate === true ) { return; }
 
 			state = STATE.ROTATE;
@@ -373,7 +373,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
-	function onMouseUp( /* event */ ) {
+	function onMouseUp( event ) {
 
 		if ( scope.enabled === false ) return;
 

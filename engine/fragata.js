@@ -20,11 +20,11 @@
 					spacialship.rotation.set(0,0,0);
 					spacialship.scale.set(0.1,0.1,0.1);
 					scene.add(spacialship);
-					
+				
 					this.controlsnave = new THREE.FlyControls(spacialship);
 					controlsnave.rollSpeed = 0.08;
 					controlsnave.autoForward = false;
-					controlsnave.dragToLook = true;
+					controlsnave.dragToLook = false;
 
 					spacialship.add(camera);
 					spacialship.add(particles);

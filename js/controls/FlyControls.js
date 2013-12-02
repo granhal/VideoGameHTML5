@@ -25,7 +25,7 @@ THREE.FlyControls = function ( object, domElement ) {
 
 	this.tmpQuaternion = new THREE.Quaternion();
 
-	this.mouseStatus = 0;
+	this.Status = 0;
 
 	this.moveState = { up: 0, down: 0, left: 0, right: 0, forward: 0, back: 0, pitchUp: 0, pitchDown: 0, yawLeft: 0, yawRight: 0, rollLeft: 0, rollRight: 0 };
 	this.moveVector = new THREE.Vector3( 0, 0, 0 );
@@ -111,7 +111,7 @@ THREE.FlyControls = function ( object, domElement ) {
 
 	};
 
-	this.mousedown = function( event ) {
+/*	this.mousedown = function( event ) {
 
 		if ( this.domElement !== document ) {
 
@@ -184,7 +184,7 @@ THREE.FlyControls = function ( object, domElement ) {
 
 		this.updateRotationVector();
 
-	};
+	};*/
 
 	this.update = function( delta ) {
 

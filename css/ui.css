@@ -8,6 +8,14 @@ body{
 	font-weight:bold;
 	overflow:hidden;
 }
+a {
+	text-decoration: none;
+	color: white;
+}
+a:hover {
+	text-decoration: none;
+	color: white;
+}
 div#menuSuperior{
 	width:99%; 
 	height:80px; 
@@ -39,7 +47,7 @@ div#controles{
 	-moz-border-radius: 7px; 
 	-webkit-border-radius : 7px;
 	width:235px;
-	height:130px;
+	height:135px;
 	position:fixed;
     background : rgba(255, 255, 255, 0.2);
     margin:auto;
@@ -72,13 +80,15 @@ div#radar{
 	padding: 8px;
 	font-size: 12px;
 	position:fixed;
+	min-width:230px;
+	min-height:190px;
 	width:20%;
-	height:20%;
+	height:15%;
 	background:rgba(255, 255, 255, 0.2);
 	left:65%;
 	top:30%;
 	vertical-align: 1px;
-	z-index: 10;
+	z-index: 100;
 	line-height:15px;
 }
 div#pilotoAutomatico{
@@ -112,4 +122,23 @@ div#sincombustible{
 	vertical-align: 1px;
 	z-index: 10;
 	line-height:15px;
+}
+div#introducirCoordenadas{
+	border-radius:7px;
+	-moz-border-radius: 7px; 
+	-webkit-border-radius : 7px;
+	padding: 8px;
+	font-size: 12px;
+	position:fixed;
+	min-width:280px;
+	min-height:50px;
+	width:21%;
+	height:10%;
+	background:rgba(255, 255, 255, 0.2);
+	left:65%;
+	top:65%;
+	vertical-align: 1px;
+	z-index: 100;
+	line-height:10px;
+
 }
