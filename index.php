@@ -26,9 +26,11 @@
 <!-- js -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
+		<!--<script src="js/jquery.knob.js"></script>-->
 		<script src="js/bootstrap.min.js"></script>
 
 		<script src="js/three.min.js"></script>
+		<!--<script src="js/raphael-min.js"></script>-->
 		
 		<script src="js/controls/FlyControls.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
@@ -82,24 +84,42 @@
 			<center>Sin combustible</center>
 		</div>
 		<div class="alert alert-error" id="sincombustibleayuda" style="width:24%; z-index:100; position:fixed; top:65%; left:33%; font-size:10px;">	</div>
-		<div id="velocidad" style="margin: 300px; position:fixed; font-size:10px; line-height:9px; width:160px;">
-			<p>Velocidad: <span id="velocidadReal"></span> m/s</p>
-			<div class="progress progress-striped active" style="width:150px;">
+		
+		<div id="barrasdeestado" style="margin: 300px; position:fixed; font-size:10px; line-height:5px; width:150px; line-height:5px">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Velocidad actual en metros por segundo">
+					<span class="icon-tasks icon-white"></span>
+					Velocidad: <span id="velocidadReal"></span> m/s
+				</a>
+			<div class="progress progress-striped active" style="width:100px; height:5px;">
 				<div class="bar" id="barravelocidad" style="width: 100%"></div>
 			</div>
-			<p>Combustible: <span id="combustibleReal"></span>%</p>
-			<div class="progress progress-danger progress-striped active" style="width:100px;">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Combustible actual, se regenera con energía solar">
+					<span class="icon-tint icon-white"></span>
+					Combustible: <span id="combustibleReal"></span>%
+				</a>
+			<div class="progress progress-danger progress-striped active" style="width:100px; height:5px;">
 				<div class="bar" id="barracombustible" style="width: 100%"></div>
 			</div>
-			<p>Escudos: 100%</p>
-			<div class="progress progress-warning progress-striped active" style="width:100px;">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Estado de los escudos">
+					<span class="icon-certificate icon-white"></span>
+					Escudos: 100%
+				</a>
+			<div class="progress progress-warning progress-striped active" style="width:100px; height:5px;">
 				<div class="bar" id="barraescudos" style="width: 100%"></div>
 			</div>
-			<p>Blindaje: 100%</p>
-			<div class="progress progress-success progress-striped active" style="width:100px;">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Estado del blindaje interno">
+					<span class="icon-heart icon-white"></span>
+					Blindaje: 100%
+				</a>
+			<div class="progress progress-success progress-striped active" style="width:100px; height:5px;">
 				<div class="bar" id="barrablindaje" style="width: 100%"></div>
 			</div>			
-			<p>Posición: <span id="posicion"></span></p>
+			<p style="line-height:10px"><span class="icon-map-marker icon-white"></span>
+			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Esta es tu posición actual">
+				Posición actual: 
+				<span id="posicion"></span>
+				</a>
+			</p>
 		</div>
 
 		<div id="creditos">
@@ -129,7 +149,7 @@
     				<td><i class="icon-globe icon-white"></i></td>
     				<td>
 						<div class="btn-group">
-						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
+						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
 						    <li><a href="#" style="font-size:10px;" id="atacar"><i class="icon-screenshot"></i> Atacar</a></li>
@@ -146,7 +166,7 @@
     				<td><i class="icon-globe icon-white"></i></td>
     				<td>
     					<div class="btn-group">
-						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;">Opciones <span class="caret"></span></a>
+						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
 						    <li><a href="#" style="font-size:10px;"><i class="icon-screenshot"></i> Atacar</a></li>
@@ -161,18 +181,18 @@
  		<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button">
 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-road icon-white"></span> Introducir coordenadas</a>
  		</button></center>	<br>
- 			<div style="line-height:5px;">
-				<p class="text-center" style="font-size:10px"><span id="duracionDelViaje"></span></p>
-				<p class="text-center" style="font-size:10px"><span id="consumoViaje"></span></p>
+ 			<div style="line-height:5px; font-size:10px;">
+				<p><span id="duracionDelViaje"></span><br>
+				<span id="consumoViaje"></span></p>
 			</div>
 		</div>
 
 		<div id="introducirCoordenadas" style="z-index:1000;">
 			<button class="close" id="cerrarIntroducirCoordenadas">&times;</button>
 			<p class="text-center" style="font-size:10px">Solo números negativos y positivos</p>
-				<input id="iry" class="input-mini" type="text" placeholder="x" name="solonum" maxlength="6" tabindex="1">
-				<input id="irz" class="input-mini" type="text" placeholder="y" name="solonum" maxlength="6" tabindex="2">
-				<input id="irx" class="input-mini" type="text" placeholder="z" name="solonum" maxlength="6" tabindex="3">
+				<input id="irx" class="input-mini" type="text" placeholder="x" name="solonum" maxlength="6" tabindex="1">
+				<input id="iry" class="input-mini" type="text" placeholder="y" name="solonum" maxlength="6" tabindex="2">
+				<input id="irz" class="input-mini" type="text" placeholder="z" name="solonum" maxlength="6" tabindex="3">
 				<button id="iracoordenadas" class="btn btn-primary btn-inverse">
 		 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Al pulsar activas el piloto automatico"><span class="icon-road icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 				</button>
@@ -198,11 +218,16 @@
 
 <script>
 $(function() {
-
+		
 			$('a#ayuda').tooltip();
 
 		    $( "div#introducirCoordenadas" ).hide().draggable();
-		 
+		 	$("div#pilotoAutomatico").hide().draggable();
+		 	$("div#sincombustibleayuda").hide().draggable();
+		 	$("div#radar").draggable();
+			$("div#controles").draggable();
+			$("div#creditos").draggable();
+
 			$("input[name=solonum]").keydown(function(event) {
 			   if(event.shiftKey){
 			        event.preventDefault();
@@ -225,14 +250,36 @@ $(function() {
 
 		    $( "button#coordenadas" ).click(function() {
 		      $( "div#introducirCoordenadas" ).show( "fold" );
-		      $("#iry").focus();
+		      $("#irx").focus();
 		    });
 
 		    $("input[name=solonum]").click(function(){
 		    	$(this).focus();
 		    });
 
+			$("a.acercarse").click(function(){
+				if(typeof pilotoautomatico == 'object') {
+					pilotoautomatico.stop();
+				}
+  				var id = $( this ).attr("id");
+  				acercarse(id);
+  				
+			});
 
+			$("button#iracoordenadas").click(function(){
+				if(typeof pilotoautomatico == 'object') {
+					pilotoautomatico.stop();
+				}
+				var irx = $("input#irx").val();
+				var iry = $("input#iry").val();
+				var irz = $("input#irz").val();
+				//console.log(irx+" "+iry+" "+irz);
+  				acercarse(0,irx,iry,irz);
+  				
+  				
+			});
+
+ 			
 		   	$("button#cerrarIntroducirCoordenadas").click(function(){
 				$("div#introducirCoordenadas").hide();
 			});
@@ -254,9 +301,7 @@ $(function() {
 				$("div#radar").toggle("fold");
 			});	
 
-			$("div#radar").draggable();
-			$("div#controles").draggable();
-			$("div#creditos").draggable();
+
 
 			$("button#cerrarControles").click(function(){
 				$("div#controles").hide();
@@ -274,23 +319,7 @@ $(function() {
 				$("div#menuInferior").hide();
 			});
 			
-			$("div#pilotoAutomatico").hide();
 
-			$("a.acercarse").click(function(){
-  				var id = $( this ).attr("id");
-  				acercarse(id);
-			});
-
-			$("button#iracoordenadas").click(function(){
-				var irx = $("input#irx").val();
-				var iry = $("input#iry").val();
-				var irz = $("input#irz").val();
-				//console.log(irx+" "+iry+" "+irz);
-  				acercarse(0,irx,iry,irz);
-  				
-			});
-
- 			$("div#sincombustibleayuda").hide().draggable();
 
 
  			
@@ -350,8 +379,8 @@ $(function() {
 				fragata();
 				motor();
 				moon();
-			this.acercarse = function(id, irz, irx, iry){
-					console.log(id);
+			this.acercarse = function(id, irx, iry, irz){
+
 					console.log(id+" "+irx+" "+iry+" "+irz);
 					if(id == "0"){
 						idx = irx;
@@ -399,11 +428,12 @@ $(function() {
 						//1km = consutme 0,003%
 					var consumoTotal = resultadoDistanciaTotal * 0.003;
 
-							$("span#duracionDelViaje").html("Duracion del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
-							$("span#consumoViaje").html("Consumo de combustible: <span style='color:red'>-"+parseInt(consumoTotal)+"%</span>");
+							$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duracion del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
+							$("span#consumoViaje").html("<span class='icon-tint icon-white'></span>Consumo de combustible: <span style='color:red'>-"+parseInt(consumoTotal)+"%</span>");
 
-					if(consumoTotal <= combustible){
-					var pilotoautomatico = new TWEEN.Tween( nave.position )
+
+					if(consumoTotal <= 999){
+					this.pilotoautomatico = new TWEEN.Tween( nave.position )
 						.to( { x: idx, y: idy, z: idz }, tiempoViaje*1000 )
 						//TWEEN.Easing.Elastic.InOut
 						.easing( TWEEN.Easing.Exponential.Out )
@@ -411,10 +441,17 @@ $(function() {
 	           				$( "div#pilotoAutomatico" ).show("fade", function() {
 	      						$( this ).hide("fade");
 							});
+							//si el combustible llega a 0, entonces salir del piloto automatico
+							if(combustible <= 0){ 
+								console.log("parar piloto automatico!"); 
+								pilotoautomatico.stop();
+								pilotoautomatico.stop();
+								pilotoautomatico.stop();
+							}
+
 							combustible -= 0.02;
 							velocidadReal = 250;
 
-							
 							$("#velocidadReal").html(velocidadReal);
 							$("div.bar#barravelocidad").css("width", velocidadReal);
 							$( "div#sincombustible" ).hide();
@@ -422,11 +459,13 @@ $(function() {
            				})
 						.start();						
 					}else{
-						console.log("sin combustible");
-						$( "div#sincombustible" ).show();
-						$("div#sincombustibleayuda").show("fold").html("<button id='cerrarCombustible' class='close'>&times;</button>Debes tener al menos "+parseInt(consumoTotal)+"% de combustible para activar el automático y realizar este viaje.");
+						$("div#sincombustible").show();
+						$("div#sincombustibleayuda")
+							.show("fold")
+							.html("<button id='cerrarCombustible' class='close'>&times;</button>Debes tener al menos "+parseInt(consumoTotal)+"% de combustible para activar el automático y realizar este viaje.");
+						
 						$("button#cerrarCombustible").click(function(){
- 							$("div#sincombustibleayuda").hide();
+							$("div#sincombustibleayuda").hide();
  						});
 					}
 			}
@@ -478,6 +517,8 @@ $(function() {
 				meshPlanet.rotation.y += 0.02 * delta;
 				meshClouds.rotation.y += 5 * 0.02 * delta;
 				stars.rotation.y += 15 * delta;
+
+
 
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);

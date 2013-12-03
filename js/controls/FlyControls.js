@@ -70,8 +70,8 @@ THREE.FlyControls = function ( object, domElement ) {
 			case 65: /*A rotar izquierda*/ this.moveState.yawLeft += 0.01; break;
 			case 68: /*D rotar derecha*/ this.moveState.yawRight += 0.01; break;
 
-			case 81: /*Q rotar abajo*/ this.moveState.rollLeft += 0.1; break;
-			case 69: /*E rotar arriba*/ this.moveState.rollRight += 0.1; break;
+			case 81: /*Q rotar abajo*/ this.moveState.rollLeft += 0.01; break;
+			case 69: /*E rotar arriba*/ this.moveState.rollRight += 0.01; break;
 
 		}
 
@@ -98,11 +98,11 @@ THREE.FlyControls = function ( object, domElement ) {
 			case 37: /*left girar derecha*/ this.moveState.pitchUp = 0.01; break;
 			case 39: /*right girar izquierda*/ this.moveState.pitchDown = 0.01; break;
 
-			case 65: /*A rotar izquierda*/ this.moveState.yawLeft -= 0.01; break;
-			case 68: /*D rotar derecha*/ this.moveState.yawRight -= 0.01; break;
+			case 65: /*A rotar izquierda*/ this.moveState.yawLeft = 0.01; break;
+			case 68: /*D rotar derecha*/ this.moveState.yawRight = 0.01; break;
 
-			case 81: /*Q rotar abajo*/ this.moveState.rollLeft -= 0.01; break;
-			case 69: /*E rotar arriba*/ this.moveState.rollRight -= 0.01; break;
+			case 81: /*Q rotar abajo*/ this.moveState.rollLeft = 0.01; break;
+			case 69: /*E rotar arriba*/ this.moveState.rollRight = 0.01; break;
 
 		}
 
