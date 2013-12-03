@@ -69,7 +69,7 @@
 			<button class="close" id="cerrarControles">&times;</button>
 			<span style="font-size:18px"><span class="icon-wrench  icon-white"></span> Controles</span><br> 
 			<span style="color:#0CF">A</span>: Girar izquierda<br>
-			<span style="color:#0CF">S</span>: Descelerar<br>
+			<span style="color:#0CF">S</span>: Frenar<br>
 			<span style="color:#0CF">D</span>: Girar derecha<br>
 			<span style="color:#0CF">W</span>: Acelerar<br> 
 			<span style="color:#0CF">Q</span>: Bajar<br>
@@ -126,7 +126,7 @@
 			<button class="close" id="cerrarCreditos" >&times;</button>
 			<span style="font-size:14px"><span class="icon-info-sign icon-white"></span> Créditos</span><br>
 			<p class="text-left">Este juego está en desarrollo, estas jugando a una ALFA de prueba, gracias por testear y formar parte de esto.
-				v.0.0.207 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
+				v.0.0.307 alfa - más info en: <u><a href="https://github.com/granhal/VideoGameHTML5">Github</a></u></p><br>
 				<p class="text-center">
 					<a href="http://www.cantelymedia.com" target="_blank"><img src="cantelymedia.jpg" width="30%"></a>&nbsp;&nbsp;&nbsp;
 					<a href="http://www.brainside.es" target="_blank"><img src="brainside.jpg" width="20%"></a>
@@ -138,7 +138,7 @@
 			<span style="font-size:14px"><span class="icon-eye-open icon-white"></span> Radar</span>
 			<table class="table table-condensed" style="font-size:10px;">
 			  	<tr>
-  				    <td>Target</td>
+  				    <td>ID</td>
     				<td>Distancia</td>
     				<td></td>
     				<td>Opciones</td>
@@ -179,7 +179,9 @@
     			</tr>
 			</table>
  		<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button">
-			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-road icon-white"></span> Introducir coordenadas</a>
+			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-edit icon-white"></span> Coordenadas</a>
+ 		</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
+			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
  		</button></center>	<br>
  			<div style="line-height:5px; font-size:10px;">
 				<p><span id="duracionDelViaje"></span><br>
@@ -194,7 +196,7 @@
 				<input id="iry" class="input-mini" type="text" placeholder="y" name="solonum" maxlength="6" tabindex="2">
 				<input id="irz" class="input-mini" type="text" placeholder="z" name="solonum" maxlength="6" tabindex="3">
 				<button id="iracoordenadas" class="btn btn-primary btn-inverse">
-		 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Al pulsar activas el piloto automatico"><span class="icon-road icon-white">&nbsp;&nbsp;&nbsp;</span></a>
+		 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Activar el piloto automático"><span class="icon-map-marker icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 				</button>
  		</div>
 
@@ -256,11 +258,22 @@ $(function() {
 		    $("input[name=solonum]").click(function(){
 		    	$(this).focus();
 		    });
+		    
+		    $("button#cancelarpilotoautomatico").click(function(){
+		    	if(typeof pilotoautomatico == 'object') {
+					pilotoautomatico.stop();
+					clearInterval(refrescarTiempoViaje);
+					$("span#duracionDelViaje").html("<center>Piloto automático desactivado.</center>");
+					$("span#consumoViaje").html("");
+				}
+		    });
 
 			$("a.acercarse").click(function(){
 				if(typeof pilotoautomatico == 'object') {
 					pilotoautomatico.stop();
+					clearInterval(refrescarTiempoViaje);
 				}
+
   				var id = $( this ).attr("id");
   				acercarse(id);
   				
@@ -269,6 +282,7 @@ $(function() {
 			$("button#iracoordenadas").click(function(){
 				if(typeof pilotoautomatico == 'object') {
 					pilotoautomatico.stop();
+					clearInterval(refrescarTiempoViaje);
 				}
 				var irx = $("input#irx").val();
 				var iry = $("input#iry").val();
@@ -428,9 +442,24 @@ $(function() {
 						//1km = consutme 0,003%
 					var consumoTotal = resultadoDistanciaTotal * 0.003;
 
-							$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duracion del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
 							$("span#consumoViaje").html("<span class='icon-tint icon-white'></span>Consumo de combustible: <span style='color:red'>-"+parseInt(consumoTotal)+"%</span>");
+							//$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
+							//restar uno al segundo de viaje hasta llegar a 0
+							this.restarViaje = function(){
+								tiempoViaje -= 1
+								$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
+								if(tiempoViaje <= 0 || combustible <= 5){
+									clearInterval(refrescarTiempoViaje);
+									$("span#duracionDelViaje").html("");
+									$("span#consumoViaje").html("");
 
+								}
+							}
+							
+							if(tiempoViaje >= 0 ){
+								this.refrescarTiempoViaje = setInterval(restarViaje, 1000);
+
+							}
 
 					if(consumoTotal <= 999){
 					this.pilotoautomatico = new TWEEN.Tween( nave.position )
@@ -438,15 +467,26 @@ $(function() {
 						//TWEEN.Easing.Elastic.InOut
 						.easing( TWEEN.Easing.Exponential.Out )
 						.onUpdate( function () {
+
 	           				$( "div#pilotoAutomatico" ).show("fade", function() {
 	      						$( this ).hide("fade");
 							});
-							//si el combustible llega a 0, entonces salir del piloto automatico
-							if(combustible <= 0){ 
-								console.log("parar piloto automatico!"); 
+
+							if(combustible <= 1){ 
 								pilotoautomatico.stop();
 								pilotoautomatico.stop();
 								pilotoautomatico.stop();
+								controlsnave.moveState.right = 0;
+								controlsnave.moveState.left = 0;
+							$("div#sincombustible").show();
+							$("div#sincombustibleayuda")
+								.show("fold")
+								.html("<button id='cerrarCombustible' class='close'>&times;</button>No tienes suficiente combustible, el piloto automático se ha desactivado.");
+							
+							$("button#cerrarCombustible").click(function(){
+								$("div#sincombustibleayuda").hide();
+	 						});
+
 							}
 
 							combustible -= 0.02;
@@ -456,17 +496,10 @@ $(function() {
 							$("div.bar#barravelocidad").css("width", velocidadReal);
 							$( "div#sincombustible" ).hide();
 
+
+
            				})
-						.start();						
-					}else{
-						$("div#sincombustible").show();
-						$("div#sincombustibleayuda")
-							.show("fold")
-							.html("<button id='cerrarCombustible' class='close'>&times;</button>Debes tener al menos "+parseInt(consumoTotal)+"% de combustible para activar el automático y realizar este viaje.");
-						
-						$("button#cerrarCombustible").click(function(){
-							$("div#sincombustibleayuda").hide();
- 						});
+						.start();				
 					}
 			}
 
