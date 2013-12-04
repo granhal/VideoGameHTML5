@@ -60,17 +60,21 @@
 		<script src="engine/estrellas.js"></script>
 		<script src="engine/satelites.js"></script>
 		<script src="engine/planetas.js"></script>
+
 		<script src="engine/jugador.js"></script>
 		<script src="engine/pilotoautomatico.js"></script>
+		<script src="engine/extraccion.js"></script>
 		<script src="engine/combustible.js"></script>
+
 		<script src="engine/ui.js"></script>
 		<script src="engine/fps.js"></script>
 	</head>
 	<body>
 		<div id="container" style="z-index:0;"></div>
-		<div id="menuSuperior" class="text-right">
-			<img src="logo.png" width="30%" >
+
+		<div id="menuSuperior" class="text-right"><img src="logo.png" width="30%" >
 		</div>
+
 		<div id="controles" style="font-size:9px;">
 			<button class="close" id="cerrarControles">&times;</button>
 			<span style="font-size:18px"><span class="icon-wrench  icon-white"></span> Controles</span><br> 
@@ -83,16 +87,26 @@
 			<span style="color:#0CF">Shift</span>: Turbo <br>
 			<span style="color:#0CF">Botón derecho ratón</span>: Camara giratoria <br>
 		</div>
-		<div id="pilotoAutomatico" style="color:#42ff00">
-			<center>Piloto automático activado</center>
+
+		<div id="pilotoAutomatico" style="color:#42ff00"><center>Piloto automático activado</center>
 		</div>
-		<div id="sincombustible" class="sincombustible" style="color:red">
-			<center>Sin combustible</center>
+
+		<div id="sincombustible" class="sincombustible" style="color:red"><center>Sin combustible</center>
 		</div>
-		<div class="alert alert-error" id="sincombustibleayuda" style="width:24%; z-index:100; position:fixed; top:65%; left:33%; font-size:10px;">	</div>
+		
+		<div id="extraccion" class="alert alert-info" style="padding:25px; height:75px; width:250px; z-index:100; position:fixed; top:65%; left:33%; font-size:12px;">
+		<center>Extrayendo mineral <span id="duracionExtraccion"></span>
+
+			<div class="progress progress-striped active" style="width:100px; height:8px;">
+				<div class="bar" id="barraextraccion" style="width: 0px"></div>
+			</div>
+			<button class="btn btn-mini btn-inverse" id="cancelarExtraccion"><span class="icon-ban-circle icon-white"></span> Cancelar</button>
+		</center>
+		</div>
+
+		<div id="sincombustibleayuda" class="alert alert-error" style="width:200px; z-index:100; position:fixed; top:65%; left:33%; font-size:10px;">	</div>
 
 		<div id="barrasdeestado" style="margin: 300px; position:fixed; font-size:10px; line-height:5px; width:250px; line-height:5px">
-
 				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Velocidad actual en metros por segundo">
 					<span class="icon-tasks icon-white"></span>
 					Velocidad: <span id="velocidadReal"></span> m/s
@@ -219,11 +233,11 @@
     				</td>
     			</tr>
 			</table>
- 		<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button">
-			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-edit icon-white"></span> Coordenadas</a>
- 		</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
-			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
- 		</button></center>	<br>
+ 			<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-edit icon-white"></span> Coordenadas</a>
+ 			</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
+				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
+ 			</button></center>	<br>
 		</div>
 
 		<div id="introducirCoordenadas" style="z-index:1000;">
@@ -237,7 +251,7 @@
 				</button>
  		</div>
 
-		<div id="menuInferior"> 
+		<div id="menuInferior">
 			<button class="close" id="cerrarMenuInferior">&times;</button>
 			<button class="btn btn-inverse" id="verRadar" alt="Radar">
 				<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Radar"><span class="icon-eye-open icon-white">&nbsp;&nbsp;&nbsp;</span></a>

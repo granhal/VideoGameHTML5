@@ -46,16 +46,30 @@ $(function() {
 					$("span#consumoViaje").html("");
 				}
 		    });
-			$("a.minear").click(function(){
+		    $("button#cancelarExtraccion").click(function(){
+		    	if(typeof extraerSumar == 'function'){
+					stopExtraer();
+				}
+		    });
+		    $("button#cerrarLejos").click(function(){
+		    	$("#extraccion").hide();
+		    });
+
+		    $("#extraccion").hide();
+			$("a.extraer").click(function(){
 				if(typeof pilotoautomatico == 'object') {
 					pilotoautomatico.stop();
 					clearInterval(refrescarTiempoViaje);
 				}
-
+				if(typeof extraerSumar == 'function'){
+					stopExtraer();
+				}
   				var id = $( this ).attr("id");
-  				acercarse(id);
+  				extraccion(id);
   				
 			});
+
+
 			$("a.acercarse").click(function(){
 				if(typeof pilotoautomatico == 'object') {
 					pilotoautomatico.stop();

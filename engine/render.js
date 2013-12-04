@@ -57,7 +57,7 @@
 				var elevarXplanet = Math.pow(meshPlanet.position.x-nave.position.x,2);
 				var elevarYplanet = Math.pow(meshPlanet.position.y-nave.position.y,2);
 				var elevarZplanet = Math.pow(meshPlanet.position.z-nave.position.z,2);
-				var distanciaPlaneta = Math.sqrt(elevarXplanet+elevarYplanet+elevarZplanet-distanciaTierra);
+				this.distanciaPlaneta = Math.sqrt(elevarXplanet+elevarYplanet+elevarZplanet-distanciaTierra);
 				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta/1000)+"K.");
 
 				var distanciaMoon = 1737/2;
