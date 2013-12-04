@@ -1,7 +1,5 @@
 			function acercarse(id, irx, iry, irz){
-			//this.acercarse = function(id, irx, iry, irz){
 
-					console.log(id+" "+irx+" "+iry+" "+irz);
 					if(id == "0"){ //introducir coordenadas
 						idx = irx;
 						idy = iry;
@@ -22,27 +20,6 @@
 						idy = 0;
 						idz = 0; 
 					}
-					console.log(idx+","+idy+","+idz);
-
-					/*var numPoints = 2;
-					this.spline = new THREE.SplineCurve3([
-				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
-				   		new THREE.Vector3( idx,idy,idz ),
-					]);
-				
-					var material = new THREE.LineBasicMaterial({
-						color: 0xff00f0,
-					});
-					
-					var geometry = new THREE.Geometry();
-					var splinePoints = spline.getPoints( numPoints );
-					
-					for( var i = 0; i < splinePoints.length; i++ ){
-						geometry.vertices.push( splinePoints[i] );  
-					}
-					
-					var line = new THREE.Line( geometry, material );
-					scene.add( line );*/
 					
 					var elevarXtotal = Math.pow(idx-nave.position.x,2);
 					var elevarYtotal = Math.pow(idy-nave.position.y,2);
@@ -54,8 +31,7 @@
 					var consumoTotal = resultadoDistanciaTotal * 0.003;
 
 					$("span#consumoViaje").html("<span class='icon-tint icon-white'></span>Consumo de combustible: <span style='color:red'>-"+parseInt(consumoTotal)+"%</span>");
-							//$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
-							//restar uno al segundo de viaje hasta llegar a 0
+
 					this.restarViaje = function(){
 								tiempoViaje -= 1
 								$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
@@ -111,3 +87,24 @@
 						.start();				
 					}
 			}
+
+
+					/*var numPoints = 2;
+					this.spline = new THREE.SplineCurve3([
+				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
+				   		new THREE.Vector3( idx,idy,idz ),
+					]);
+				
+					var material = new THREE.LineBasicMaterial({
+						color: 0xff00f0,
+					});
+					
+					var geometry = new THREE.Geometry();
+					var splinePoints = spline.getPoints( numPoints );
+					
+					for( var i = 0; i < splinePoints.length; i++ ){
+						geometry.vertices.push( splinePoints[i] );  
+					}
+					
+					var line = new THREE.Line( geometry, material );
+					scene.add( line );*/

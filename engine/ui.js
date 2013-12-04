@@ -54,8 +54,10 @@ $(function() {
 		    $("button#cerrarLejos").click(function(){
 		    	$("#extraccion").hide();
 		    });
-
-		    $("#extraccion").hide();
+			$("button#cerrarCombustible").click(function(){
+				$("div#sincombustibleayuda").hide();
+	 		});
+		    $("#extraccion").draggable().hide();
 			$("a.extraer").click(function(){
 				if(typeof pilotoautomatico == 'object') {
 					pilotoautomatico.stop();

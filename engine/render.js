@@ -28,9 +28,7 @@
 				particles.position.x = 15+velocidadReal/90000;
 				particles.rotation.x = 0.9+velocidadReal/1000;
 				
-				this.posicionXnave = nave.position.x;
-				this.posicionYnave = nave.position.y;
-				this.posicionZnave = nave.position.z;
+
 
 				/*var objetos = function(id, tipoObjeto, nombreObjeto, alineacion, posicionX, posicionY, posicionZ, icono){
 					var idObjeto = id; // 0
@@ -74,6 +72,9 @@
 				var resultadoDistanciaNave = Math.sqrt(elevarXnave+elevarYnave+elevarZnave-distanciaNave);
 				$("#distanciaNave").html(parseInt(resultadoDistanciaNave/1000)+"K.");
 
+				this.posicionXnave = nave.position.x;
+				this.posicionYnave = nave.position.y;
+				this.posicionZnave = nave.position.z;
 				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
 
                                 if(velocidadReal >= 250){
