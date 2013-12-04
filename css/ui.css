@@ -14,7 +14,7 @@ a {
 }
 a:hover {
 	text-decoration: none;
-	color: white;
+	color: #cccccc;
 }
 div#menuSuperior{
 	width:99%; 

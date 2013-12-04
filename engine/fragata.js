@@ -38,11 +38,11 @@
 				});
 
 			console.log("fragata cargada");
-
+			particulasmotor();
 		};
 
 
-		function motor(){
+		function particulasmotor(){
 			var container, stats;
 			var particles, geometry, materials = [], i, h, color, sprite, size;
 

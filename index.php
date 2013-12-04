@@ -53,13 +53,18 @@
 		<script src="js/libs/stats.min.js"></script>
 		<script src="js/libs/tween.min.js"></script>
 
-		<script src="engine/onwindowsresize.js"></script>
-		<script src="engine/fragata.js"></script>
 		<script src="engine/postprocessing.js"></script>
-		<script src="engine/statsinwindows.js"></script>
+		<script src="engine/render.js"></script>
+		<script src="engine/onwindowsresize.js"></script>
+		<script src="engine/luces.js"></script>
 		<script src="engine/stars.js"></script>
 		<script src="engine/moon.js"></script>
 		<script src="engine/planet.js"></script>
+		<script src="engine/fragata.js"></script>
+		<script src="engine/pilotoautomatico.js"></script>
+		<script src="engine/combustible.js"></script>
+		<script src="engine/ui.js"></script>
+		<script src="engine/statsinwindows.js"></script>
 	</head>
 	<body>
 		<div id="menuSuperior" class="text-right">
@@ -84,8 +89,9 @@
 			<center>Sin combustible</center>
 		</div>
 		<div class="alert alert-error" id="sincombustibleayuda" style="width:24%; z-index:100; position:fixed; top:65%; left:33%; font-size:10px;">	</div>
-		
-		<div id="barrasdeestado" style="margin: 300px; position:fixed; font-size:10px; line-height:5px; width:150px; line-height:5px">
+
+		<div id="barrasdeestado" style="margin: 300px; position:fixed; font-size:10px; line-height:5px; width:250px; line-height:5px">
+
 				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Velocidad actual en metros por segundo">
 					<span class="icon-tasks icon-white"></span>
 					Velocidad: <span id="velocidadReal"></span> m/s
@@ -120,6 +126,10 @@
 				<span id="posicion"></span>
 				</a>
 			</p>
+			<div style="line-height:5px; font-size:10px;">
+				<p><span id="duracionDelViaje"></span><br>
+				<span id="consumoViaje"></span></p>
+			</div>	
 		</div>
 
 		<div id="creditos">
@@ -141,10 +151,13 @@
   				    <td>ID</td>
     				<td>Distancia</td>
     				<td></td>
-    				<td>Opciones</td>
+    				<td>Opc.</td>
     			</tr>
   				<tr>
-  				    <td>Tierra</td>
+  				    <td>
+  				    	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Aliados" href="#">
+  				    	<span style="color:#5aff00;">&#8226;</span> Planeta</a>
+  				    </td>
     				<td><span id="distanciaPlaneta"></span> Km.</td>
     				<td><i class="icon-globe icon-white"></i></td>
     				<td>
@@ -152,16 +165,19 @@
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
-						    <li><a href="#" style="font-size:10px;" id="atacar"><i class="icon-screenshot"></i> Atacar</a></li>
-						    <li><a href="#" style="font-size:10px;" id="minear"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="atacar"><i class="icon-screenshot"></i> Apuntar y atacar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="extraer"><i class="icon-fullscreen"></i> Extraer mineral</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#" style="font-size:10px;"><i class="icon-info-sign"></i> Info</a></li>
+						    <li><a href="#" style="font-size:10px;" id="1" alt="1" class="info"><i class="icon-info-sign"></i> Información</a></li>
 						  </ul>
 						</div>
 					</td>
     			</tr>
     			<tr>
-    				<td>Luna</td>
+    				<td>
+    				  	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Neutral" href="#">
+  				    	<span style="color:#0CF;">&#8226;</span> Satélite</a>
+    				</td>
     				<td><span id="distanciaMoon"></span> Km.</td>
     				<td><i class="icon-globe icon-white"></i></td>
     				<td>
@@ -169,10 +185,34 @@
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
-						    <li><a href="#" style="font-size:10px;"><i class="icon-screenshot"></i> Atacar</a></li>
-						    <li><a href="#" style="font-size:10px;"><i class="icon-fullscreen"></i> Minear</a></li>
+						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="atacar"><i class="icon-screenshot"></i> Apuntar y atacar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="extraer"><i class="icon-fullscreen"></i> Extraer mineral</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#" style="font-size:10px;"><i class="icon-info-sign"></i> Info</a></li>
+						    <li><a href="#" style="font-size:10px;" id="2" alt="2" class="info"><i class="icon-info-sign"></i> Información</a></li>
+						  </ul>
+						</div>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>
+    				  	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Neutral" href="#">
+  				    	<span style="color:#0CF;">&#8226;</span> Nave espacial</a>
+  				    </td>
+    				<td><span id="distanciaNave"></span> Km.</td>
+    				<td><i class="icon-plane icon-white"></i></td>
+    				<td>
+    					<div class="btn-group">
+						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="acercarse"><i class="icon-map-marker"></i> Acercarse</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="atacar"><i class="icon-screenshot"></i> Apuntar y atacar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="espiar"><i class="icon-qrcode"></i> Espiar y robar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="robar"><i class="icon-random"></i> Intercambio</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="robar"><i class="icon-comment"></i> Mensaje</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="robar"><i class="icon-wrench"></i> Reparar</a></li>
+						    <li><a href="#" style="font-size:10px;" id="3" alt="3" class="opcionesradar"><i class="icon-cog"></i> Más</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#" style="font-size:10px;"id="3" alt="3" class="info"><i class="icon-user"></i> Información</a></li>
 						  </ul>
 						</div>
     				</td>
@@ -183,10 +223,7 @@
  		</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
  		</button></center>	<br>
- 			<div style="line-height:5px; font-size:10px;">
-				<p><span id="duracionDelViaje"></span><br>
-				<span id="consumoViaje"></span></p>
-			</div>
+
 		</div>
 
 		<div id="introducirCoordenadas" style="z-index:1000;">
@@ -219,126 +256,6 @@
 		 </div>
 
 <script>
-$(function() {
-		
-			$('a#ayuda').tooltip();
-
-		    $( "div#introducirCoordenadas" ).hide().draggable();
-		 	$("div#pilotoAutomatico").hide().draggable();
-		 	$("div#sincombustibleayuda").hide().draggable();
-		 	$("div#radar").draggable();
-			$("div#controles").draggable();
-			$("div#creditos").draggable();
-
-			$("input[name=solonum]").keydown(function(event) {
-			   if(event.shiftKey){
-			        event.preventDefault();
-			   }
-			 
-			   if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 109 || event.keyCode == 189){
-			   } else {
-			        if (event.keyCode < 95) {
-			          if (event.keyCode < 48 || event.keyCode > 57) {
-			                event.preventDefault();
-			          }
-			        } else {
-			              if (event.keyCode < 96 || event.keyCode > 105) {
-			                  event.preventDefault();
-			              }
-			        }
-			      }
-			   });
-
-
-		    $( "button#coordenadas" ).click(function() {
-		      $( "div#introducirCoordenadas" ).show( "fold" );
-		      $("#irx").focus();
-		    });
-
-		    $("input[name=solonum]").click(function(){
-		    	$(this).focus();
-		    });
-		    
-		    $("button#cancelarpilotoautomatico").click(function(){
-		    	if(typeof pilotoautomatico == 'object') {
-					pilotoautomatico.stop();
-					clearInterval(refrescarTiempoViaje);
-					$("span#duracionDelViaje").html("<center>Piloto automático desactivado.</center>");
-					$("span#consumoViaje").html("");
-				}
-		    });
-
-			$("a.acercarse").click(function(){
-				if(typeof pilotoautomatico == 'object') {
-					pilotoautomatico.stop();
-					clearInterval(refrescarTiempoViaje);
-				}
-
-  				var id = $( this ).attr("id");
-  				acercarse(id);
-  				
-			});
-
-			$("button#iracoordenadas").click(function(){
-				if(typeof pilotoautomatico == 'object') {
-					pilotoautomatico.stop();
-					clearInterval(refrescarTiempoViaje);
-				}
-				var irx = $("input#irx").val();
-				var iry = $("input#iry").val();
-				var irz = $("input#irz").val();
-				//console.log(irx+" "+iry+" "+irz);
-  				acercarse(0,irx,iry,irz);
-  				
-  				
-			});
-
- 			
-		   	$("button#cerrarIntroducirCoordenadas").click(function(){
-				$("div#introducirCoordenadas").hide();
-			});
-
-			$("button#verSalirUniverso").click(function(){
-				var pagina = 'http://cantely.com/demo/lab3dviewver/';
-				document.location.href=pagina;
-			});
-
-			$("button#verControles").click(function(){
-				$( "div#controles" ).toggle("fold");
-			});
-
-			$("button#verCreditos").click(function(){
-				$("div#creditos").toggle("fold");
-			});	
-
-			$("button#verRadar").click(function(){
-				$("div#radar").toggle("fold");
-			});	
-
-
-
-			$("button#cerrarControles").click(function(){
-				$("div#controles").hide();
-			});
-
-			$("button#cerrarCreditos").click(function(){
-				$("div#creditos").hide();
-			});
-
-			$("button#cerrarRadar").click(function(){
-				$("div#radar").hide();
-			});
-
-			$("button#cerrarMenuInferior").click(function(){
-				$("div#menuInferior").hide();
-			});
-			
-
-
-
- 			
-});
-
         if (!Detector.webgl) {
             Detector.addGetWebGLMessage();
             document.getElementById('container').innerHTML = "";
@@ -346,32 +263,23 @@ $(function() {
 
 		var d, dPlanet, dMoon, dMoonVec = new THREE.Vector3();
 		this.clock = new THREE.Clock();
-		var combustible = 100;
-		var numPoints;
 		this.delta = clock.getDelta();
 		init();
 		animate();	
 
 		function init() {
 
-				this.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1e7 );
+				this.camera = new THREE.PerspectiveCamera( 39, window.innerWidth / window.innerHeight, 1, 1e7 );
 				camera.position.set(150,0,0);
 				camera.rotation.set(0,0,90);
 				camera.useQuaternion = true;
 				
 				cameraControls = new THREE.OrbitControls(camera);
-				cameraControls.maxDistance = 400;
+				cameraControls.maxDistance = 300;
 				cameraControls.minDistance = 10;
 				
 				this.scene = new THREE.Scene();
 				scene.fog = new THREE.FogExp2( 0x000000, 0.0000003 );
-
-				dirLight = new THREE.DirectionalLight( 0xc2c2c2 );
-				dirLight.position.set( 2000, 1000, 1 ).normalize();
-				scene.add( dirLight );
-
-				ambientLight = new THREE.AmbientLight( 0x4f3f1f );
-				scene.add( ambientLight );
 
 				renderer = new THREE.WebGLRenderer();
 		        renderer.setSize( window.innerWidth, window.innerHeight );
@@ -381,150 +289,20 @@ $(function() {
 		        container = document.createElement('div');
 				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
-				
 
+		        luces();
+
+				starts();
 				planet();
-
+				moon();
 				tubo();
 				enemigo();
-				starts();
-				statsinwindows();
 				prostprocessing();
 				fragata();
-				motor();
-				moon();
-			this.acercarse = function(id, irx, iry, irz){
 
-					console.log(id+" "+irx+" "+iry+" "+irz);
-					if(id == "0"){
-						idx = irx;
-						idy = iry;
-						idz = irz;
-					}
-					if(id == "1"){ 
-						idx = -10000/3;
-						idy = 0;
-						idz = 10000;
-					};
-					if(id == "2"){ 
-						idx = -384400/3.1;
-						idy = 0;
-						idz = 0;
-					};
-					console.log(idx+","+idy+","+idz);
+				statsinwindows();
 
-					/*var numPoints = 2;
-					this.spline = new THREE.SplineCurve3([
-				  	 	new THREE.Vector3( nave.position.x,nave.position.y,nave.position.z ),
-				   		new THREE.Vector3( idx,idy,idz ),
-					]);
-				
-					var material = new THREE.LineBasicMaterial({
-						color: 0xff00f0,
-					});
-					
-					var geometry = new THREE.Geometry();
-					var splinePoints = spline.getPoints( numPoints );
-					
-					for( var i = 0; i < splinePoints.length; i++ ){
-						geometry.vertices.push( splinePoints[i] );  
-					}
-					
-					var line = new THREE.Line( geometry, material );
-					scene.add( line );*/
-
-					var elevarXtotal = Math.pow(idx-nave.position.x,2);
-					var elevarYtotal = Math.pow(idy-nave.position.y,2);
-					var elevarZtotal = Math.pow(idz-nave.position.z,2);
-					var resultadoDistanciaTotal = Math.sqrt(elevarXtotal+elevarYtotal+elevarZtotal);
-					var tiempoViaje = resultadoDistanciaTotal/2000;
-						//35000km = consume 100% combustible
-						//1km = consutme 0,003%
-					var consumoTotal = resultadoDistanciaTotal * 0.003;
-
-							$("span#consumoViaje").html("<span class='icon-tint icon-white'></span>Consumo de combustible: <span style='color:red'>-"+parseInt(consumoTotal)+"%</span>");
-							//$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
-							//restar uno al segundo de viaje hasta llegar a 0
-							this.restarViaje = function(){
-								tiempoViaje -= 1
-								$("span#duracionDelViaje").html("<span class='icon-time icon-white'></span>Duración del viaje: <span style='color:#0CF'>"+parseInt(tiempoViaje)+"</span> seg.");
-								if(tiempoViaje <= 0 || combustible <= 5){
-									clearInterval(refrescarTiempoViaje);
-									$("span#duracionDelViaje").html("");
-									$("span#consumoViaje").html("");
-
-								}
-							}
-							
-							if(tiempoViaje >= 0 ){
-								this.refrescarTiempoViaje = setInterval(restarViaje, 1000);
-
-							}
-
-					if(consumoTotal <= 999){
-					this.pilotoautomatico = new TWEEN.Tween( nave.position )
-						.to( { x: idx, y: idy, z: idz }, tiempoViaje*1000 )
-						//TWEEN.Easing.Elastic.InOut
-						.easing( TWEEN.Easing.Exponential.Out )
-						.onUpdate( function () {
-
-	           				$( "div#pilotoAutomatico" ).show("fade", function() {
-	      						$( this ).hide("fade");
-							});
-
-							if(combustible <= 1){ 
-								pilotoautomatico.stop();
-								pilotoautomatico.stop();
-								pilotoautomatico.stop();
-								controlsnave.moveState.right = 0;
-								controlsnave.moveState.left = 0;
-							$("div#sincombustible").show();
-							$("div#sincombustibleayuda")
-								.show("fold")
-								.html("<button id='cerrarCombustible' class='close'>&times;</button>No tienes suficiente combustible, el piloto automático se ha desactivado.");
-							
-							$("button#cerrarCombustible").click(function(){
-								$("div#sincombustibleayuda").hide();
-	 						});
-
-							}
-
-							combustible -= 0.02;
-							velocidadReal = 250;
-
-							$("#velocidadReal").html(velocidadReal);
-							$("div.bar#barravelocidad").css("width", velocidadReal);
-							$( "div#sincombustible" ).hide();
-
-
-
-           				})
-						.start();				
-					}
-			}
-
-			var gastarcombustible = function(){
-					var maxcombustible = 99;
-					var mincombusitlbe = 0;
-
-					if(velocidadReal > 10){
-							combustible -= velocidadReal/50;
-					}else{
-						if(combustible <= maxcombustible){
-							combustible += 1.9;
-						}
-					}
-					if(combustible <= 0){
-						combustible = mincombusitlbe;
-						controlsnave.moveState.right = 0;
-						controlsnave.moveState.left = 0;
-						$( "div#sincombustible" ).show();
-					}else{
-						$( "div#sincombustible" ).hide();
-					}
-			}
 				setInterval(gastarcombustible,1000);
-
 				window.addEventListener( 'resize', onWindowResize, false );
 		}   
 					
@@ -535,87 +313,8 @@ $(function() {
 				render();
 				stats.update();
 				stats2.update();
-				//renderParticulas();
-		}
-
-
-		function render() {   
-
-				var delta = clock.getDelta();
-				//Providence.rotation.y += 0.1 * delta;
-				tuboMesh.rotation.y += 0.1 * delta;
-				tuboMesh.rotation.x += 0.1 * delta;
-				tuboMesh.rotation.z += 0.5 * delta;
-
-				meshPlanet.rotation.y += 0.02 * delta;
-				meshClouds.rotation.y += 5 * 0.02 * delta;
-				stars.rotation.y += 15 * delta;
-
-
-
-				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
-				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
-				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
-
-				$("div.bar#barravelocidad").css("width", velocidadReal);
-				$("div.bar#barracombustible").css("width", Math.round( combustible* 10 ) / 10);
-
-				$("#combustibleReal").html(Math.round( combustible* 10 ) / 10);
-
-				$("div.bar#barrablindaje").css("width", 100);
-				$("div.bar#barraescudos").css("width", 100);
-
-				$("#velocidadReal").html(velocidadReal);
-				particles.scale.x = velocidadReal/900000;
-				particles.scale.z = velocidadReal/90000000;
-				particles.position.x = 15+velocidadReal/90000;
-				particles.rotation.x = 0.9+velocidadReal/1000;
-				
-				this.posicionXnave = nave.position.x;
-				this.posicionYnave = nave.position.y;
-				this.posicionZnave = nave.position.z;
-
-				var radioTierra = 6370/2;
-				var elevarXplanet = Math.pow(meshPlanet.position.x-nave.position.x,2);
-				var elevarYplanet = Math.pow(meshPlanet.position.y-nave.position.y,2);
-				var elevarZplanet = Math.pow(meshPlanet.position.z-nave.position.z,2);
-				var distanciaPlaneta = Math.sqrt(elevarXplanet+elevarYplanet+elevarZplanet-radioTierra);
-				$("#distanciaPlaneta").html(parseInt(distanciaPlaneta/1000)+"K.");
-
-				var radioMoon = 1737/2;
-				var elevarXmoon = Math.pow(meshMoon.position.x-nave.position.x,2);
-				var elevarYmoon = Math.pow(meshMoon.position.y-nave.position.y,2);
-				var elevarZmoon = Math.pow(meshMoon.position.z-nave.position.z,2);
-				var resultadoDistanciaMoon = Math.sqrt(elevarXmoon+elevarYmoon+elevarZmoon-radioMoon);
-				$("#distanciaMoon").html(parseInt(resultadoDistanciaMoon/1000)+"K.");
-				
-				$("#posicion").html("<br>x:"+parseInt(posicionXnave)+"<br>y:"+parseInt(posicionYnave)+"<br>z:"+parseInt(posicionZnave));
-
-                                if(velocidadReal >= 250){
-                                    controlsnave.moveState.left = 2.50;
-                                };
-
-                                if(velocidadReal <= -10){
-                                	controlsnave.moveState.left = 0;
-                                    controlsnave.moveState.right = 0.10;
-                                };
-
-                                if(controlsnave.movementSpeedMultiplier == 1){ 
-                                    controlsnave.moveState.left = 5; 
-                                };
-
-
-				/*$("#botonoculus").click(function(){
-					effect.render( scene, camera );
-				});*/
-
-				TWEEN.update( );
-				cameraControls.update( delta ); 
-				controlsnave.update(  delta );
-				composer.render( delta );
 
 		}
-
 </script>
 </body>
 </html>
