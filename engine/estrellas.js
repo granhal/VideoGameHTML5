@@ -1,4 +1,4 @@
-		function starts(){
+		function estrellas(){
 
 				var i, r = 7371, starsGeometry = [ new THREE.Geometry(), new THREE.Geometry() ];
 

@@ -1,5 +1,5 @@
 		
-		function fragata(){
+		function jugador(){
 
 				texture = new THREE.Texture();
 				loadTexture = new THREE.ImageLoader();

@@ -57,16 +57,17 @@
 		<script src="engine/render.js"></script>
 		<script src="engine/onwindowsresize.js"></script>
 		<script src="engine/luces.js"></script>
-		<script src="engine/stars.js"></script>
-		<script src="engine/moon.js"></script>
-		<script src="engine/planet.js"></script>
-		<script src="engine/fragata.js"></script>
+		<script src="engine/estrellas.js"></script>
+		<script src="engine/satelites.js"></script>
+		<script src="engine/planetas.js"></script>
+		<script src="engine/jugador.js"></script>
 		<script src="engine/pilotoautomatico.js"></script>
 		<script src="engine/combustible.js"></script>
 		<script src="engine/ui.js"></script>
-		<script src="engine/statsinwindows.js"></script>
+		<script src="engine/fps.js"></script>
 	</head>
 	<body>
+		<div id="container" style="z-index:0;"></div>
 		<div id="menuSuperior" class="text-right">
 			<img src="logo.png" width="30%" >
 		</div>
@@ -223,7 +224,6 @@
  		</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
 			<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
  		</button></center>	<br>
-
 		</div>
 
 		<div id="introducirCoordenadas" style="z-index:1000;">
@@ -237,8 +237,6 @@
 				</button>
  		</div>
 
-		<div id="container"></div>
-		
 		<div id="menuInferior"> 
 			<button class="close" id="cerrarMenuInferior">&times;</button>
 			<button class="btn btn-inverse" id="verRadar" alt="Radar">
@@ -292,15 +290,16 @@
 
 		        luces();
 
-				starts();
-				planet();
-				moon();
-				tubo();
-				enemigo();
-				prostprocessing();
-				fragata();
+				estrellas();
+				planetas();
+				satelites();
+				puertasEspaciales();
+				enemigos();
+				jugador();
 
-				statsinwindows();
+				prostprocessing();
+				
+				fps();
 
 				setInterval(gastarcombustible,1000);
 				window.addEventListener( 'resize', onWindowResize, false );

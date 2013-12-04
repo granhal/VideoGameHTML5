@@ -1,4 +1,4 @@
-		function moon(){
+		function satelites(){
 				var moonTextura = THREE.ImageUtils.loadTexture( "textures/planets/moon_1024.jpg" );
 				var moonMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, map: moonTextura } );
 
@@ -11,7 +11,7 @@
 
 		}
 
-		function tubo(){
+		function puertasEspaciales(){
 				var tuboTextura = THREE.ImageUtils.loadTexture( "textures/planets/tubo_1024.jpg" );
 				var tuboMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, map: tuboTextura } );
 
@@ -24,7 +24,7 @@
 
 		}
 
-		function enemigo(){
+		function enemigos(){
 
 						var ProvidenceMaterial = new THREE.MeshPhongMaterial({map: THREE.ImageUtils.loadTexture('models/Providence_difusofinal.jpg') });
 						loader = new THREE.JSONLoader();
