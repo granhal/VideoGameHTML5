@@ -44,16 +44,18 @@
 		<script src="js/postprocessing/MaskPass.js"></script>
 		<script src="js/postprocessing/RenderPass.js"></script>
 		<script src="js/postprocessing/FilmPass.js"></script>
+		<script src="js/renderers/CSS3DRenderer.js"></script>
 		<script src="js/loaders/OBJLoader.js"></script>
 		<script src="js/loaders/MTLLoader.js"></script>
 		<!--<script src="js/loaders/ColladaLoader.js"></script>
-		<script src="js/loaders/AssimpJSONLoader.js"></script>
-		<script src="js/effects/OculusRiftEffect.js"></script>-->
+		<script src="js/loaders/AssimpJSONLoader.js"></script>-->
+		<script src="js/effects/OculusRiftEffect.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 		<script src="js/libs/tween.min.js"></script>
 
+		<script src="engine/video.js"></script>
 		<script src="engine/postprocessing.js"></script>
 		<script src="engine/render.js"></script>
 		<script src="engine/onwindowsresize.js"></script>
@@ -71,6 +73,10 @@
 		<script src="engine/fps.js"></script>
 	</head>
 	<body>
+			<video id="video" autoplay style="display:none">
+			<source src="textures/embrion2.webm">
+			<!--<source src="textures/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>-->
+		</video>
 		<div id="container" style="z-index:0;"></div>
 
 		<div id="menuSuperior" class="text-right">
@@ -289,12 +295,12 @@
 		this.delta = clock.getDelta();
 		init();
 		animate();	
-
+				var video, texturev, materialv, planev;
 		function init() {
 
-				this.camera = new THREE.PerspectiveCamera( 39, window.innerWidth / window.innerHeight, 1, 1e7 );
+				this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 1e7 );
 				camera.position.set(150,0,0);
-				camera.rotation.set(0,0,90);
+				//camera.rotation.set(0,0,90);
 				
 				cameraControls = new THREE.OrbitControls(camera);
 				cameraControls.maxDistance = 300;
@@ -308,9 +314,17 @@
 		        renderer.sortObjects = true;
 		        renderer.autoClear = true;
 		        renderer.setClearColor(new THREE.Color(0x000000));
+
+
 		        container = document.createElement('div');
 				document.body.appendChild( container );
 		        container.appendChild( renderer.domElement );
+
+		        effect = new THREE.OculusRiftEffect( renderer, {worldScale: 100} );
+				effect.setSize( window.innerWidth, window.innerHeight );
+
+
+				video();
 
 		        luces();
 
@@ -331,13 +345,13 @@
 					
 
 		function animate() {
-
 				requestAnimationFrame( animate );
 				render();
 				stats.update();
 				stats2.update();
 
 		}
+
 
 		function tiempocargaweb(){
 				var fint = new Date;
@@ -350,6 +364,7 @@
 				var salida = "Página cargada en "+segundost +" seg.";
 				$("#tiempocarga").html(salida);
 		}	
+
 		function startTime(){
 			today=new Date();
 			h=today.getHours();
@@ -360,6 +375,7 @@
 			$("#reloj").html(h+":"+m+":"+s);
 			t=setTimeout('startTime()',500);
 		}
+
 		function checkTime(it){ 
 			if (it<10) {
 				it="0" + it;
@@ -367,7 +383,7 @@
 			return it;
 		}
 
-		
+
 </script>
 </body>
 </html>

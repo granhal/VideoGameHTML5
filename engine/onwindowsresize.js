@@ -3,8 +3,9 @@
                 SCREEN_HEIGHT = window.innerHeight;
                 SCREEN_WIDTH  = window.innerWidth;
 
-                renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
+                renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				effect.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
                 camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
                 camera.updateProjectionMatrix();
 

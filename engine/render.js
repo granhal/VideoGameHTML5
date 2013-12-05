@@ -1,6 +1,13 @@
 		function render() {   
 
+
 				var delta = clock.getDelta();
+
+				if ( video.readyState === video.HAVE_ENOUGH_DATA ) {
+
+					if ( texturev ) texturev.needsUpdate = true;
+
+				}
 				//Providence.rotation.y += 0.1 * delta;
 				tuboMesh.rotation.y += 0.1 * delta;
 				tuboMesh.rotation.x += 0.1 * delta;
@@ -28,8 +35,6 @@
 				particles.position.x = 15+velocidadReal/90000;
 				particles.rotation.x = 0.9+velocidadReal/1000;
 				
-
-
 				/*var objetos = function(id, tipoObjeto, nombreObjeto, alineacion, posicionX, posicionY, posicionZ, icono){
 					var idObjeto = id; // 0
 					var tipoObjeto = tipoObjeto; // planeta
@@ -91,10 +96,10 @@
                                 };
 
 
-				/*$("#botonoculus").click(function(){
-					effect.render( scene, camera );
-				});*/
-
+				//$("#botonoculus").click(function(){
+					//effect.render( scene, camera );
+				//});
+				renderer.render( scene, camera );
 				TWEEN.update( );
 				cameraControls.update( delta ); 
 				controlsnave.update(  delta );

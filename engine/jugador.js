@@ -16,7 +16,7 @@
 						}
 					} );
 					
-					spacialship.position.set(-10,-100,-100);
+					spacialship.position.set(700,75,150);
 					spacialship.rotation.set(0,0,0);
 					spacialship.scale.set(0.1,0.1,0.1);
 					scene.add(spacialship);
@@ -28,6 +28,7 @@
 
 					spacialship.add(camera);
 					spacialship.add(particles);
+					//spacialship.add(effect.oCamera)
 
 					this.nave = spacialship;
 					
