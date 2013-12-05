@@ -12,7 +12,7 @@
 
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
-				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
+				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
 
 				$("div.bar#barravelocidad").css("width", velocidadReal);
 				$("div.bar#barracombustible").css("width", Math.round( combustible* 10 ) / 10);

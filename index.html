@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es-ES">
-<script> var inicio = new Date; </script>
+<script> var iniciot = new Date; </script>
 	<head>
 		<meta charset="utf-8">
 		<meta name="robots" content="index, follow" />
@@ -340,14 +340,14 @@
 		}
 
 		function tiempocargaweb(){
-				var fin = new Date;
-				var segundos = (fin-inicio)/1000;
-				if(segundos <= 1){
+				var fint = new Date;
+				var segundost = (fint-iniciot)/1000;
+				if(segundost <= 1){
 					$("#tiempocarga").css("color", "#0CF");
 				}else{
 					$("#tiempocarga").css("color", "red");
 				}
-				var salida = "Página cargada en "+segundos +" seg.";
+				var salida = "Página cargada en "+segundost +" seg.";
 				$("#tiempocarga").html(salida);
 		}	
 		function startTime(){
@@ -357,13 +357,17 @@
 			s=today.getSeconds();
 			m=checkTime(m);
 			s=checkTime(s);
-			document.getElementById('reloj').innerHTML=h+":"+m+":"+s;
+			$("#reloj").html(h+":"+m+":"+s);
 			t=setTimeout('startTime()',500);
 		}
-		function checkTime(i){ 
-			if (i<10) {i="0" + i;} return i;}
-			window.onload=function(){startTime();
+		function checkTime(it){ 
+			if (it<10) {
+				it="0" + it;
+			} 
+			return it;
 		}
+
+		
 </script>
 </body>
 </html>
