@@ -1,5 +1,10 @@
-$(function() {
 		
+$(function() {
+
+
+			startTime();
+			tiempocargaweb();
+
 			$("a#ayuda").tooltip();
 
 		    $("div#introducirCoordenadas").hide().draggable();
@@ -27,10 +32,13 @@ $(function() {
 			        }
 			      }
 			   });
-
+			$("div#barrasdeestado").draggable();
+		    $("button#verEstado").click(function() {
+		      $("div#barrasdeestado").toggle( "fold" );
+		    });
 
 		    $("button#coordenadas").click(function() {
-		      $("div#introducirCoordenadas").show( "fold" );
+		      $("div#introducirCoordenadas").toggle( "fold" );
 		      $("#irx").focus();
 		    });
 

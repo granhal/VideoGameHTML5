@@ -1,3 +1,9 @@
+
+@font-face {
+ font-family: 'Aldrich';
+ src: url('../fonts/Aldrich-Regular.ttf');
+}
+
 body{
 	font-family: 'Aldrich', sans-serif;
 	color: white;
@@ -18,18 +24,18 @@ a:hover {
 }
 div#menuSuperior{
 	width:99%; 
-	height:80px; 
+	height:105px; 
 	position:fixed; 
 	overflow:hidden; 
 	font-size: 15px;
 	color:white;
-	background-color: rgba(255, 255, 255, 0.1);
-    z-index: 100;
+	background-color: rgba(255, 255, 255, 0.05);
+    z-index: 0;
     padding: 5px;
-
+    line-height:10px;
 }
 div#menuInferior{
-	width:99%; 
+	width:99.9%; 
 	height:30px; 
 	position:fixed; 
 	bottom:0; 
@@ -73,6 +79,7 @@ div#creditos{
 	z-index: 10;
 	line-height:15px;
 }
+
 div#radar{
 	border-radius:7px;
 	-moz-border-radius: 7px; 
@@ -81,12 +88,12 @@ div#radar{
 	font-size: 12px;
 	position:fixed;
 	min-width:230px;
-	min-height:190px;
-	width:20%;
-	height:15%;
+	min-height:230px;
+	width:22%;
+	height: 20%;
 	background:rgba(255, 255, 255, 0.2);
-	left:65%;
-	top:30%;
+	right:10px;
+	top:120px;
 	vertical-align: 1px;
 	z-index: 100;
 	line-height:15px;
@@ -101,7 +108,7 @@ div#pilotoAutomatico{
 	width:170px;
 	height:15px;
 	background:rgba(255, 255, 255, 0.2);
-	left:300px;
+	left:22%;
 	top:240px;
 	vertical-align: 1px;
 	z-index: 10;
@@ -117,7 +124,7 @@ div#sincombustible{
 	width:170px;
 	height:15px;
 	background:rgba(255, 255, 255, 0.2);
-	left:300px;
+	left:22%;
 	top:200px;
 	vertical-align: 1px;
 	z-index: 10;
@@ -132,10 +139,10 @@ div#introducirCoordenadas{
 	position:fixed;
 	min-width:280px;
 	min-height:50px;
-	width:21%;
+	width:22%;
 	height:10%;
 	background:rgba(255, 255, 255, 0.2);
-	left:65%;
+	right: 10px;
 	top:65%;
 	vertical-align: 1px;
 	z-index: 100;

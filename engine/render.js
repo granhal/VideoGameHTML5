@@ -12,7 +12,7 @@
 
 				var velocidadUiaumentandose = parseInt(controlsnave.moveState.left*100);
 				var velocidadUireduciendose = parseInt(controlsnave.moveState.right*100);
-				this.velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
+				var velocidadReal = velocidadUiaumentandose - velocidadUireduciendose;
 
 				$("div.bar#barravelocidad").css("width", velocidadReal);
 				$("div.bar#barracombustible").css("width", Math.round( combustible* 10 ) / 10);
@@ -65,12 +65,12 @@
 				var resultadoDistanciaMoon = Math.sqrt(elevarXmoon+elevarYmoon+elevarZmoon-distanciaMoon);
 				$("#distanciaMoon").html(parseInt(resultadoDistanciaMoon/1000)+"K.");
 				
-				var distanciaNave = 0;
+				/*var distanciaNave = 0;
 				var elevarXnave = Math.pow(Providence.position.x-nave.position.x,2);
 				var elevarYnave = Math.pow(Providence.position.y-nave.position.y,2);
 				var elevarZnave = Math.pow(Providence.position.z-nave.position.z,2);
 				var resultadoDistanciaNave = Math.sqrt(elevarXnave+elevarYnave+elevarZnave-distanciaNave);
-				$("#distanciaNave").html(parseInt(resultadoDistanciaNave/1000)+"K.");
+				$("#distanciaNave").html(parseInt(resultadoDistanciaNave/1000)+"K.");*/
 
 				this.posicionXnave = nave.position.x;
 				this.posicionYnave = nave.position.y;

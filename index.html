@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es-ES">
+<script> var inicio = new Date; </script>
 	<head>
 		<meta charset="utf-8">
 		<meta name="robots" content="index, follow" />
@@ -22,7 +23,7 @@
 		<link href="css/ui.css" rel="stylesheet" media="screen">
 
 <!-- fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
+		<!--<link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>-->
 <!-- js -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
@@ -72,7 +73,11 @@
 	<body>
 		<div id="container" style="z-index:0;"></div>
 
-		<div id="menuSuperior" class="text-right"><img src="logo.png" width="30%" >
+		<div id="menuSuperior" class="text-right">
+			<p><img src="logo.png" width="30%" ><br>
+			<span id="tiempocarga" style="font-size:10px;"></span><br>
+			<span id="reloj" style="font-size:10px;"></span></p>
+
 		</div>
 
 		<div id="controles" style="font-size:9px;">
@@ -94,19 +99,19 @@
 		<div id="sincombustible" class="sincombustible" style="color:red"><center>Sin combustible</center>
 		</div>
 		
-		<div id="extraccion" class="alert alert-info" style="padding:25px; height:75px; width:250px; z-index:100; position:fixed; top:65%; left:33%; font-size:12px;">
+		<div id="extraccion" class="alert alert-info" style="padding:15px; height:15%; width:35%; z-index:100; position:fixed; top:65%; left:33%; font-size:10px; background-color:rgba(217,237,247,0.8); max-width:200px;">
 		<center>Extrayendo mineral <span id="duracionExtraccion"></span>
 
 			<div class="progress progress-striped active" style="width:100px; height:8px;">
 				<div class="bar" id="barraextraccion" style="width: 0px"></div>
 			</div>
-			<button class="btn btn-mini btn-inverse" id="cancelarExtraccion"><span class="icon-ban-circle icon-white"></span> Cancelar</button>
+			<button class="btn btn-mini btn-inverse" id="cancelarExtraccion"><span class="icon-ban-circle icon-white"></span> Cancelar la extracción</button>
 		</center>
 		</div>
 
-		<div id="sincombustibleayuda" class="alert alert-error" style="width:200px; z-index:100; position:fixed; top:65%; left:33%; font-size:10px;">	</div>
+		<div id="sincombustibleayuda" class="alert alert-error" style="width:35%; z-index:100; position:fixed; top:65%; left:33%; font-size:10px; ">	</div>
 
-		<div id="barrasdeestado" style="margin: 300px; position:fixed; font-size:10px; line-height:5px; width:250px; line-height:5px">
+		<div id="barrasdeestado" style="top: 280px; left:22%; position:fixed; font-size:10px; line-height:5px; width:250px; line-height:5px;">
 				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Velocidad actual en metros por segundo">
 					<span class="icon-tasks icon-white"></span>
 					Velocidad: <span id="velocidadReal"></span> m/s
@@ -163,19 +168,13 @@
 			<span style="font-size:14px"><span class="icon-eye-open icon-white"></span> Radar</span>
 			<table class="table table-condensed" style="font-size:10px;">
 			  	<tr>
+			  		<td></td>
   				    <td>ID</td>
     				<td>Distancia</td>
     				<td></td>
-    				<td>Opc.</td>
     			</tr>
   				<tr>
   				    <td>
-  				    	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Aliados" href="#">
-  				    	<span style="color:#5aff00;">&#8226;</span> Planeta</a>
-  				    </td>
-    				<td><span id="distanciaPlaneta"></span> Km.</td>
-    				<td><i class="icon-globe icon-white"></i></td>
-    				<td>
 						<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
@@ -187,15 +186,16 @@
 						  </ul>
 						</div>
 					</td>
+  				    <td>
+  				    	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Aliados" href="#">
+  				    	<span style="color:#5aff00;">&#8226;</span> Planeta</a>
+  				    </td>
+    				<td><span id="distanciaPlaneta"></span> Km.</td>
+    				<td><i class="icon-globe icon-white"></i></td>
+
     			</tr>
     			<tr>
-    				<td>
-    				  	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Neutral" href="#">
-  				    	<span style="color:#0CF;">&#8226;</span> Satélite</a>
-    				</td>
-    				<td><span id="distanciaMoon"></span> Km.</td>
-    				<td><i class="icon-globe icon-white"></i></td>
-    				<td>
+    			    <td>
     					<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
@@ -207,15 +207,16 @@
 						  </ul>
 						</div>
     				</td>
-    			</tr>
-    			<tr>
     				<td>
     				  	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Neutral" href="#">
-  				    	<span style="color:#0CF;">&#8226;</span> Nave espacial</a>
-  				    </td>
-    				<td><span id="distanciaNave"></span> Km.</td>
-    				<td><i class="icon-plane icon-white"></i></td>
-    				<td>
+  				    	<span style="color:#0CF;">&#8226;</span> Satélite</a>
+    				</td>
+    				<td><span id="distanciaMoon"></span> Km.</td>
+    				<td><i class="icon-globe icon-white"></i></td>
+
+    			</tr>
+    			<tr>
+    			    <td>
     					<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-mini btn-inverse" data-toggle="dropdown" href="#" style="font-size:8px;"><span class="icon-cog icon-white"></span><span class="caret"></span></a>
 						  <ul class="dropdown-menu">
@@ -231,9 +232,17 @@
 						  </ul>
 						</div>
     				</td>
+    				<td>
+    				  	<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Neutral" href="#">
+  				    	<span style="color:#0CF;">&#8226;</span> Nave espacial</a>
+  				    </td>
+
+    				<td><span id="distanciaNave"></span> Km.</td>
+    				<td><i class="icon-plane icon-white"></i></td>
+
     			</tr>
 			</table>
- 			<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button">
+ 			<center><button id="coordenadas" class="btn btn-mini btn-inverse" type="button" data-toggle="button">
 				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Introducir las coordenadas donde apuntar el piloto automático." href="#"><span class="icon-edit icon-white"></span> Coordenadas</a>
  			</button>&nbsp;<button id="cancelarpilotoautomatico" class="btn btn-mini btn-inverse" type="button">
 				<a id="ayuda" data-toggle="tooltip" data-placement="top" title="Desactivar piloto automático" href="#"><span class="icon-ban-circle icon-white"></span> Desactivar P/A.</a>
@@ -252,17 +261,19 @@
  		</div>
 
 		<div id="menuInferior">
-			<button class="close" id="cerrarMenuInferior">&times;</button>
-			<button class="btn btn-inverse" id="verRadar" alt="Radar">
+			<button class="btn btn-inverse" id="verEstado" data-toggle="button">
+				<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Estado"><span class="icon-user icon-white">&nbsp;&nbsp;&nbsp;</span></a>
+			</button>
+			<button class="btn btn-inverse" id="verRadar" data-toggle="button">
 				<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Radar"><span class="icon-eye-open icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 			</button>
-			<button class="btn btn-inverse" id="verControles">			
+			<button class="btn btn-inverse" id="verControles" data-toggle="button">			
 				<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Configuración"><span class="icon-wrench icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 			</button>
-		 	<button class="btn btn-inverse" id="verCreditos">			
+		 	<button class="btn btn-inverse" id="verCreditos" data-toggle="button">			
 		 		<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Créditos"><span class="icon-info-sign icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 			</button>
-		 	<button class="btn btn-inverse" id="verSalirUniverso">		
+		 	<button class="btn btn-inverse" id="verSalirUniverso" data-toggle="button">		
 		 		<a id="ayuda" data-toggle="tooltip" data-placement="right" title="Hangar"><span class="icon-home icon-white">&nbsp;&nbsp;&nbsp;</span></a>
 			</button>
 		 </div>
@@ -284,7 +295,6 @@
 				this.camera = new THREE.PerspectiveCamera( 39, window.innerWidth / window.innerHeight, 1, 1e7 );
 				camera.position.set(150,0,0);
 				camera.rotation.set(0,0,90);
-				camera.useQuaternion = true;
 				
 				cameraControls = new THREE.OrbitControls(camera);
 				cameraControls.maxDistance = 300;
@@ -308,7 +318,7 @@
 				planetas();
 				satelites();
 				puertasEspaciales();
-				enemigos();
+				//enemigos();
 				jugador();
 
 				prostprocessing();
@@ -327,6 +337,32 @@
 				stats.update();
 				stats2.update();
 
+		}
+
+		function tiempocargaweb(){
+				var fin = new Date;
+				var segundos = (fin-inicio)/1000;
+				if(segundos <= 1){
+					$("#tiempocarga").css("color", "#0CF");
+				}else{
+					$("#tiempocarga").css("color", "red");
+				}
+				var salida = "Página cargada en "+segundos +" seg.";
+				$("#tiempocarga").html(salida);
+		}	
+		function startTime(){
+			today=new Date();
+			h=today.getHours();
+			m=today.getMinutes();
+			s=today.getSeconds();
+			m=checkTime(m);
+			s=checkTime(s);
+			document.getElementById('reloj').innerHTML=h+":"+m+":"+s;
+			t=setTimeout('startTime()',500);
+		}
+		function checkTime(i){ 
+			if (i<10) {i="0" + i;} return i;}
+			window.onload=function(){startTime();
 		}
 </script>
 </body>
